@@ -1,0 +1,26 @@
+<mvc:View controllerName="project1.controller.product_copy"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    displayBlock="true"
+    height="100%">
+    
+    <f:DynamicPage id="dynamicPageId3" toggleHeaderOnTitleClick="false">
+
+    <!-- DynamicPage Title -->
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <Title text="Copy"/>
+            </f:heading>
+        </f:DynamicPageTitle>
+    </f:title>
+
+    <f:content>
+    <Text  id="Tester" text="Test"></Text>
+    </f:content>
+
+</f:DynamicPage>
+
+</mvc:View>
+

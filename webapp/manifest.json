@@ -1,0 +1,186 @@
+{
+  "_version": "1.53.0",
+  "sap.app": {
+    "id": "project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{Gestions des bacs}}", 
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.3",
+      "toolsId": "db759823-3031-4bb7-958c-1d7a272e54da"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/SAP/YBACS_G_SRV_01/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+    "inbounds": {
+      "ProductView": {
+  "semanticObject": "project1",
+  "action": "product",
+  "title": "Product View",
+  "signature": {
+    "parameters": {
+      "route": {
+        "required": false
+      }
+    }
+  },
+  "resolutionResult": {
+    "applicationType": "SAPUI5",
+    "additionalInformation": "SAPUI5.Component=project1",
+    "url": "/sap/bc/ui5_ui5/sap/project1"
+  }
+},
+"productcopy": {
+  "semanticObject": "project1",
+  "action": "copy",
+  "title": "Product Copy Tile",
+  "signature": {
+    "parameters": {
+      "route": {
+        "required": false
+      }
+    }
+  },
+  "resolutionResult": {
+    "applicationType": "SAPUI5",
+    "additionalInformation": "SAPUI5.Component=project1",
+    "url": "/sap/bc/ui5_ui5/sap/project1"
+  }
+}
+
+    }
+  }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.114.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project1.i18n.i18n"
+        }
+      },
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "project1.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "pattern": "copy",
+          "name": "copy",
+          "target": "product_copy"
+        },
+        {
+          "pattern": "product",
+          "name": "product",
+          "target": "product_view"
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{bacId}",
+          "target": [
+            "TargetDetail"
+          ]
+        }
+      ],
+      "targets": {
+      "product_copy": {
+        "viewName": "product_copy",
+        "viewId": "productCopy",
+        "viewType": "XML",
+        "transition": "slide",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "title": "Product Copy View",
+        "clearControlAggregation": false
+      },
+      "product_view": {
+        "viewType": "XML",
+        "transition": "slide",
+        "clearControlAggregation": false,
+        "viewId": "product_view",
+        "viewName": "product_view",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      },
+      "TargetDetail": {
+        "viewType": "XML",
+        "transition": "slide",
+        "clearControlAggregation": false,
+        "viewId": "Detail",
+        "viewName": "Detail",
+        "controlId": "app",
+        "controlAggregation": "pages"
+      }
+    }
+
+    },
+    "rootView": {
+      "viewName": "project1.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    }
+  }
+}
