@@ -19,6 +19,17 @@ sap.ui.define([
             // Make sure the model is set to the current view
             this.getView().setModel(oModel);
 
+
+            //tables smart gestion
+             const oSmartTable = this.byId("receptionsSmartTable");
+                oSmartTable.attachInitialise(function (oEvent) {
+                    const oTable = oSmartTable.getTable();
+                    if (oTable && oTable.setGrowing) {
+                        oTable.setGrowing(true);
+                        oTable.setGrowingThreshold(20); // Adjust based on your preference
+                    }
+                });
+
         },
 
 
@@ -73,6 +84,12 @@ sap.ui.define([
             } else {
                 console.log("No valid binding context found.");
             }
+        },
+
+
+        onCreateReceptionPress: function () {
+            var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("ReceptionCreate"); // Match this to the route name in manifest.json
         }
     });
 });

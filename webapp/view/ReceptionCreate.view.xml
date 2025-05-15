@@ -1,0 +1,51 @@
+<mvc:View
+    controllerName="project1.controller.ReceptionCreate"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    displayBlock="true">
+
+    <Page title="Créer une Réception">
+        <content>
+            <smartForm:SmartForm
+                id="ReceptionForm"
+                editable="true"
+                class="sapUiSmallMargin">
+
+                <smartForm:Group label="Informations Réception">
+                    <smartForm:GroupElement>
+                        <smartField:SmartField id="NomClient" value="{fournisseurs}" showValueHelp="true"   textLabel="Client"  />
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{bac_de_reception}" showValueHelp="true" textLabel="Bac" />
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{produit}" showValueHelp="true" textLabel="produit" />
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{volume_recu_std}" />
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{date_reception}" />
+                    </smartForm:GroupElement>
+
+                    <smartForm:GroupElement>
+                        <smartField:SmartField value="{bon_livraison}" />
+                    </smartForm:GroupElement>
+                </smartForm:Group>
+            </smartForm:SmartForm>
+
+            <Button
+                text="Enregistrer"
+                type="Emphasized"
+                icon="sap-icon://save"
+                press=".onSaveReception"
+                class="sapUiSmallMarginTop" />
+        </content>
+    </Page>
+</mvc:View>

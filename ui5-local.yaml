@@ -46,11 +46,13 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /sap/opu/odata/sap/YPRODUCT_TEST_SRV
+          - urlPath: /sap/opu/odata/SAP/YBACS_G_SRV_01
             metadataPath: ./webapp/localService/mainService/metadata.xml
             mockdataPath: ./webapp/localService/mainService/data
             generateMockData: true
-        annotations: []
+        annotations:
+          - localPath: ./webapp/localService/mainService/YBACS_G_ANNO_MDL_01.xml
+            urlPath: /sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='YBACS_G_ANNO_MDL_01',Version='0001')/$value/
 builder:
   customTasks:
     - name: ui5-tooling-transpile-task

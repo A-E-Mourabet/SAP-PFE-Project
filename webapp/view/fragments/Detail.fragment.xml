@@ -1,0 +1,48 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.f">
+    
+    <Dialog id="clientDialog" title="Clients" draggable="true" resizable="true" contentWidth="60%" contentHeight="70%" class="sapUiResponsivePadding">
+        
+        <VBox class="sapUiSmallMargin">
+            <!-- Add the id attribute for dynamic updating -->
+            <Title id="dialogTitle" text="Liste des Clients déposant dans le bac " level="H3" />
+
+            <Table id="ClientsTable"
+                sticky="ColumnHeaders,HeaderToolbar"
+                growing="true"
+                inset="false"
+                width="100%"
+                items="{
+                    path: '/YSTOCK_BAC_CDS',
+                    parameters: {
+                        expand: 'toclient'
+                    }
+                }">
+
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column><Text text="Propriétaire" /></Column>
+                    <Column><Text text="Volume Stocké" /></Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem type="Inactive">
+                        <cells>
+                            <Text text="{toclient/nom_client}" />
+                            <Text text="{ path: 'volume_stock', formatter: '.formatter.formatNumber' }" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </VBox>
+
+        <!-- Close Button -->
+        <endButton>
+            <Button text="Fermer" type="Reject" press="onCloseDialog"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

@@ -15,6 +15,7 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/Device", "./model/models"], fu
 			this.setModel(models.createDeviceModel(), "device");
 
 			// create the views based on the url/hash
+			this.getModel(); // this will initialize the default model (from manifest)
 			this.getRouter().initialize();
 		},
 		/**

@@ -1,26 +1,94 @@
-<mvc:View controllerName="project1.controller.product_copy"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    displayBlock="true"
-    height="100%">
-    
-    <f:DynamicPage id="dynamicPageId3" toggleHeaderOnTitleClick="false">
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:core="sap.ui.core"
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          xmlns:uxap="sap.uxap"
+          controllerName="project1.controller.product_copy"
+          displayBlock="true"
+          height="100%">
 
-    <!-- DynamicPage Title -->
-    <f:title>
-        <f:DynamicPageTitle>
-            <f:heading>
-                <Title text="Copy"/>
-            </f:heading>
-        </f:DynamicPageTitle>
-    </f:title>
+    <uxap:ObjectPageLayout
+        id="objectPageLayout"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        upperCaseAnchorBar="false"
+        useIconTabBar="false">
 
-    <f:content>
-    <Text  id="Tester" text="Test"></Text>
-    </f:content>
+        <!-- Optional: Object Page Header Title -->
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="Gestion des Réceptions" />
+                </uxap:expandedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
 
-</f:DynamicPage>
+        <!-- Header Content (Optional) -->
+        <uxap:headerContent>
+            <Text text="Filtres disponibles pour les réceptions ci-dessous" />
+        </uxap:headerContent>
 
+        <!-- FIRST SECTION: SMART FILTER BAR -->
+        <uxap:ObjectPageSection title="Filtres">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                        <smartFilterBar:SmartFilterBar
+                            id="receptionsSmartFilter"
+                            entitySet="YRECEPTIONS_CDS"
+                            useToolbar="true"
+                            useSnapshot="true"
+                            showGoOnFB="true"
+                            enableBasicSearch="true"
+                            persistencyKey="ReceptionsSmartFilterPersistencyKey">
+                            <smartFilterBar:customData>
+                                <core:CustomData key="defaultFilterBarExpanded" value="{}"/>
+                                <core:CustomData key="defaultShowAllFilters" value="{}"/>
+                            </smartFilterBar:customData>
+                        </smartFilterBar:SmartFilterBar>
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
+
+        <!-- SECOND SECTION: SMART TABLE -->
+        <uxap:ObjectPageSection title="Liste des Réceptions">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                        <smartTable:SmartTable
+                            id="receptionsSmartTable"
+                            entitySet="YRECEPTIONS_CDS"
+                            tableType="ResponsiveTable"
+                            enableExport="true"
+                            useVariantManagement="false"
+                            header="Liste des réceptions"
+                            smartFilterId="receptionsSmartFilter"
+                            persistencyKey="ReceptionsSmartTablePersistencyKey"
+                            enableAutoBinding="true"
+                            showRowCount="true"
+                            class="sapUiResponsiveContentPadding"
+                            showFullScreenButton="true"
+                            demandPopin="true"
+                            requestAtLeastFields="date_reception,volume_recu_app,ClientNom,bac_de_reception,produit,fournisseurs"
+                            ignoredFields="">
+                            <smartTable:customToolbar>
+                                <Toolbar>
+                                    <ToolbarSpacer />
+                                    <Button
+                                        text="Créer Réception"
+                                        icon="sap-icon://add"
+                                        press=".onCreateReceptionPress" />
+                                </Toolbar>
+                            </smartTable:customToolbar>
+                        </smartTable:SmartTable>
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
+
+    </uxap:ObjectPageLayout>
 </mvc:View>
-

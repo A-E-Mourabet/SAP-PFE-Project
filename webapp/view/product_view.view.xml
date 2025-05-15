@@ -1,89 +1,117 @@
-<mvc:View controllerName="project1.controller.product_view"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
-    xmlns:f="sap.f"
-    displayBlock="true"
-    height="100%">
-    
-    <f:DynamicPage id="dynamicPageId" toggleHeaderOnTitleClick="false">
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+          xmlns="sap.m"
+          xmlns:core="sap.ui.core"
+          xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+          xmlns:smartTable="sap.ui.comp.smarttable"
+          xmlns:uxap="sap.uxap"
+          controllerName="project1.controller.product_view"
+          displayBlock="true"
+          height="100%">
 
-    <!-- DynamicPage Title -->
-    <f:title>
-        <f:DynamicPageTitle>
-            <f:heading>
-                <Title text="Liste des Bacs"/>
-            </f:heading>
-        </f:DynamicPageTitle>
-    </f:title>
+    <uxap:ObjectPageLayout
+        id="objectPageLayout2"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        upperCaseAnchorBar="false"
+        useIconTabBar="false">
 
-    <!-- DynamicPage Content -->
-    <f:content>
-        <Table id="bacsTable"
-            sticky="ColumnHeaders,HeaderToolbar"
-            inset="false"
-            growing="true"
-            items="{
-                path: '/YBACS_CDS',
-                parameters: {
-                    expand: 'toproduct_item'
-                },
-                sorter: {
-                    path: 'nom_bac'
-                }
-            }"
-            class="sapFDynamicPageAlignContent"
-            width="auto">
+        <!-- Page Title -->
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="Gestion des Bacs" />
+                </uxap:expandedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
 
-            <headerToolbar>
-                <OverflowToolbar>
-                    <ToolbarSpacer/>
-                    <SearchField search="onSearch" width="17.5rem"/>
-                </OverflowToolbar>
-            </headerToolbar>
+        <!-- Optional Header Info -->
+        <uxap:headerContent>
+            <Text text="Liste filtrable des bacs et leurs informations" />
+        </uxap:headerContent>
 
-            <columns>
-                <Column><Text text="ID Bac" /></Column>
-                <Column><Text text="Nom Bac" /></Column>
-                <Column minScreenWidth="Tablet" demandPopin="true">
-                    <Text text="Produit" />
-                </Column>
-                <Column minScreenWidth="Tablet" demandPopin="true">
-                    <Text text="Capacité" />
-                </Column>
-                <Column minScreenWidth="Tablet" demandPopin="true">
-                    <Text text="Stockage" />
-                </Column>
-                <Column minScreenWidth="Tablet" demandPopin="true">
-                    <Text text="Creux" />
-                </Column>
-            </columns>
+        <!-- FILTER SECTION -->
+        <uxap:ObjectPageSection title="Filtres">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                        <smartFilterBar:SmartFilterBar
+                            id="smartFilter"
+                            entitySet="YBACS_CDS"
+                            useToolbar="false"
+                            useSnapshot="true"
+                            showGoOnFB="true"
+                            persistencyKey="SmartTablePersistencyKey">
+                            <smartFilterBar:customData>
+                                <core:CustomData key="defaultFilterBarExpanded" value="true"/>
+                                <core:CustomData key="defaultShowAllFilters" value="true"/>
+                            </smartFilterBar:customData>
+                        </smartFilterBar:SmartFilterBar>
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
 
-            <items>
-                <ColumnListItem type="Active" vAlign="Middle"  press="onListItemPress">
-                    <cells>
-                        <Text text="{id_bacs}" />
-                        <Text text="{nom_bac}" />
-                        <Text text="{toproduct_item/nom_produit}" />
-                        <Text text="{ path: 'capacity', formatter: '.formatter.formatNumber' }" />
-                        <Text text="{ path: 'stockage', formatter: '.formatter.formatNumber' }" />
-                        <Text text="{ path: 'creux', formatter: '.formatter.formatNumber' }" />
-                    </cells>
-                </ColumnListItem>
-            </items>
+        <!-- TABLE SECTION -->
+        <uxap:ObjectPageSection title="Liste des Bacs">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                        <smartTable:SmartTable
+                            id="bacsSmartTable"
+                            entitySet="YBACS_CDS"
+                            tableType="ResponsiveTable"
+                            enableExport="true"
+                            useVariantManagement="false"
+                            header="Bacs"
+                            smartFilterId="smartFilter"
+                            persistencyKey="SmartTableAnalytical_Explored"
+                            enableAutoBinding="true"
+                            showRowCount="true"
+                            class="sapUiResponsiveContentPadding"
+                            showFullScreenButton="true"
+                            demandPopin="true"
+                            beforeRebindTable="onBeforeRebindTable"
+                            requestAtLeastFields="nom_bac,capacity,stockage,creux,toproduct_item/nom_produit"
+                            ignoredFields="id_bacs,product"
+                            useColumnLabelsAsTooltips="true">
 
-        </Table>
-    </f:content>
+                            <Table>
+                                <ColumnListItem type="Navigation" press="onItemPress">
+                                    <cells>
+                                        <!-- Nom Bac -->
+                                        <Text text="{nom_bac}" />
 
-    <!-- DynamicPage Footer -->
-    <f:footer>
-        <OverflowToolbar>
-            <ToolbarSpacer/>
-            <Button type="Accept" text="Valider"/>
-            <Button type="Reject" text="Annuler"/>
-        </OverflowToolbar>
-    </f:footer>
+                                        <!-- Nom Produit -->
+                                        <Text text="{nom_produit}" />
 
-</f:DynamicPage>
+                                        <!-- Capacity -->
+                                        <Text text="{
+                                            path: 'capacity',
+                                            formatter: '.formatter.formatNumber'
+                                        }" />
 
+                                        <!-- Stockage -->
+                                        <Text text="{
+                                            path: 'stockage',
+                                            formatter: '.formatter.formatNumber'
+                                        }" />
+
+                                        <!-- Creux -->
+                                        <Text text="{
+                                            path: 'creux',
+                                            formatter: '.formatter.formatNumber'
+                                        }" />
+                                    </cells>
+                                </ColumnListItem>
+                            </Table>
+
+                        </smartTable:SmartTable>
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
+
+    </uxap:ObjectPageLayout>
 </mvc:View>
-
