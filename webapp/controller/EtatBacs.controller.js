@@ -7,7 +7,7 @@ sap.ui.define([
 ], function (Controller, Filter, FilterOperator, Fragment, formatter) {
     "use strict";
 
-    return Controller.extend("project1.controller.product_view", {
+    return Controller.extend("project1.controller.EtatBacs", {
         formatter: formatter,
 
         onInit: function () {

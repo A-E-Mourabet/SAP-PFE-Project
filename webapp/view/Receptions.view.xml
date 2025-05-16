@@ -4,7 +4,7 @@
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
           xmlns:smartTable="sap.ui.comp.smarttable"
           xmlns:uxap="sap.uxap"
-          controllerName="project1.controller.product_copy"
+          controllerName="project1.controller.Receptions"
           displayBlock="true"
           height="100%">
 

@@ -7,17 +7,50 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/Device", "./model/models"], fu
 			interfaces: ["sap.ui.core.IAsyncContentCreation"]
 		},
 		init: function () {
-			// call the base component's init function
-			UIComponent.prototype.init.call(this); // create the views based on the url/hash
-			UIComponent.prototype.init.apply(this, arguments);
+            // Appel du constructeur parent
+            UIComponent.prototype.init.apply(this, arguments);
 
-			// create the device model
-			this.setModel(models.createDeviceModel(), "device");
+            // Initialisation du modèle de device
+            this.setModel(models.createDeviceModel(), "device");
 
-			// create the views based on the url/hash
-			this.getModel(); // this will initialize the default model (from manifest)
-			this.getRouter().initialize();
-		},
+            // Gestion de la navigation selon l’intent
+            const oStartupParameters = this.getComponentData()?.startupParameters;
+            const action = oStartupParameters?.action?.[0]; // ex: "etatbacs", "receptions", etc.
+
+            const oRouter = this.getRouter();
+
+            if (action) {
+                switch (action) {
+                    case "etatbacs":
+                        oRouter.navTo("etatbacs");
+                        break;
+                    case "receptions":
+                        oRouter.navTo("receptions");
+                        break;
+                    case "sorties":
+                        oRouter.navTo("sorties");
+                        break;
+                    case "transferts":
+                        oRouter.navTo("transferts");
+                        break;
+                    case "jaugeage":
+                        oRouter.navTo("jaugeage");
+                        break;
+                    case "rapportbac":
+                        oRouter.navTo("rapportbac");
+                        break;
+                    case "rapportgl":
+                        oRouter.navTo("rapportgl");
+                        break;
+                    case "rapportclients":
+                        oRouter.navTo("rapportclients");
+                        break;
+                    default:
+                        oRouter.navTo("notFound"); // ou une vue par défaut
+                        break;
+                }
+            }
+        },
 		/**
 		 * This method can be called to determine whether the sapUiSizeCompact or sapUiSizeCozy
 		 * design mode class should be set, which influences the size appearance of some controls.

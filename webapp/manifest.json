@@ -34,43 +34,114 @@
             }
         },
         "crossNavigation": {
-            "inbounds": {
-                "ProductView": {
-                    "semanticObject": "project1",
-                    "action": "product",
-                    "title": "Product View",
-                    "signature": {
-                        "parameters": {
-                            "route": {
-                                "required": false
-                            }
-                        }
-                    },
-                    "resolutionResult": {
-                        "applicationType": "SAPUI5",
-                        "additionalInformation": "SAPUI5.Component=project1",
-                        "url": "/sap/bc/ui5_ui5/sap/project1"
-                    }
-                },
-                "productcopy": {
-                    "semanticObject": "project1",
-                    "action": "copy",
-                    "title": "Product Copy Tile",
-                    "signature": {
-                        "parameters": {
-                            "route": {
-                                "required": false
-                            }
-                        }
-                    },
-                    "resolutionResult": {
-                        "applicationType": "SAPUI5",
-                        "additionalInformation": "SAPUI5.Component=project1",
-                        "url": "/sap/bc/ui5_ui5/sap/project1"
-                    }
-                }
-            }
-        }
+  "inbounds": {
+    "etatbacs": {
+      "semanticObject": "project1",
+      "action": "etatbacs",
+      "title": "État des Bacs",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "receptions": {
+      "semanticObject": "project1",
+      "action": "receptions",
+      "title": "Réceptions",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "sorties": {
+      "semanticObject": "project1",
+      "action": "sorties",
+      "title": "Sorties",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "transferts": {
+      "semanticObject": "project1",
+      "action": "transferts",
+      "title": "Transferts",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "jaugeage": {
+      "semanticObject": "project1",
+      "action": "jaugeage",
+      "title": "Jaugeage",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "rapportbac": {
+      "semanticObject": "project1",
+      "action": "rapportbac",
+      "title": "Rapport Bac",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "rapportgl": {
+      "semanticObject": "project1",
+      "action": "rapportgl",
+      "title": "Rapport G/L",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    },
+    "rapportclients": {
+      "semanticObject": "project1",
+      "action": "rapportclients",
+      "title": "Rapport Clients",
+      "signature": {
+        "parameters": {}
+      },
+      "resolutionResult": {
+        "applicationType": "SAPUI5",
+        "additionalInformation": "SAPUI5.Component=project1",
+        "url": "/sap/bc/ui5_ui5/sap/project1"
+      }
+    }
+  }
+}
+
     },
     "sap.ui": {
         "technology": "UI5",
@@ -115,7 +186,10 @@
                 "settings": {
                     "defaultBindingMode": "TwoWay",
                     "defaultCountMode": "Inline",
-                    "useBatch": true
+                    "useBatch": false,
+                    "metadataUrlParams": {
+                        "sap-language": "EN"
+                    }
                 },
                 "type": "sap.ui.model.odata.v2.ODataModel"
             }
@@ -148,14 +222,44 @@
             },
             "routes": [
                 {
-                    "pattern": "copy",
-                    "name": "copy",
-                    "target": "product_copy"
+                    "pattern": "etatbacs",
+                    "name": "etatbacs",
+                    "target": "etatbacs"
                 },
                 {
-                    "pattern": "product",
-                    "name": "product",
-                    "target": "product_view"
+                    "pattern": "receptions",
+                    "name": "receptions",
+                    "target": "receptions"
+                },
+                {
+                    "pattern": "sorties",
+                    "name": "sorties",
+                    "target": "sorties"
+                },
+                {
+                    "pattern": "transferts",
+                    "name": "transferts",
+                    "target": "transferts"
+                },
+                {
+                    "pattern": "jaugeage",
+                    "name": "jaugeage",
+                    "target": "jaugeage"
+                },
+                {
+                    "pattern": "rapportbac",
+                    "name": "rapportbac",
+                    "target": "rapportbac"
+                },
+                {
+                    "pattern": "rapportgl",
+                    "name": "rapportgl",
+                    "target": "rapportgl"
+                },
+                {
+                    "pattern": "rapportclients",
+                    "name": "rapportclients",
+                    "target": "rapportclients"
                 },
                 {
                     "name": "detail",
@@ -169,22 +273,59 @@
                 }
             ],
             "targets": {
-                "product_copy": {
-                    "viewName": "product_copy",
-                    "viewId": "productCopy",
+                "etatbacs": {
+                    "viewName": "EtatBacs",
                     "viewType": "XML",
-                    "transition": "slide",
+                    "viewId": "etatbacs",
                     "controlId": "app",
-                    "controlAggregation": "pages",
-                    "title": "Product Copy View",
-                    "clearControlAggregation": false
+                    "controlAggregation": "pages"
                 },
-                "product_view": {
+                "receptions": {
+                    "viewName": "Receptions",
                     "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "product_view",
-                    "viewName": "product_view",
+                    "viewId": "receptions",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "sorties": {
+                    "viewName": "Sorties",
+                    "viewType": "XML",
+                    "viewId": "sorties",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "transferts": {
+                    "viewName": "Transferts",
+                    "viewType": "XML",
+                    "viewId": "transferts",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "jaugeage": {
+                    "viewName": "Jaugeage",
+                    "viewType": "XML",
+                    "viewId": "jaugeage",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "rapportbac": {
+                    "viewName": "RapportBac",
+                    "viewType": "XML",
+                    "viewId": "rapportbac",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "rapportgl": {
+                    "viewName": "RapportGL",
+                    "viewType": "XML",
+                    "viewId": "rapportgl",
+                    "controlId": "app",
+                    "controlAggregation": "pages"
+                },
+                "rapportclients": {
+                    "viewName": "RapportClients",
+                    "viewType": "XML",
+                    "viewId": "rapportclients",
                     "controlId": "app",
                     "controlAggregation": "pages"
                 },
