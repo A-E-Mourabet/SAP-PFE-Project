@@ -1,7 +1,8 @@
-sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/UIComponent", "sap/ui/core/routing/History"], function (Controller, UIComponent, History) {
+sap.ui.define(["sap/ui/core/mvc/Controller", "sap/ui/core/UIComponent", "sap/ui/core/routing/History","project1/controller/utilities/formatter"], function (Controller, UIComponent, History,formatter) {
 	"use strict";
 
 	return Controller.extend("com.myorg.myapp.controller.BaseController", {
+		formatter:formatter,
 		/**
 		 * Convenience method for accessing the component of the controller's view.
 		 * @returns {sap.ui.core.Component} The component of the controller's view

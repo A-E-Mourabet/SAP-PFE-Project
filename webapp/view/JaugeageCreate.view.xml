@@ -1,0 +1,61 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    controllerName="project1.controller.JaugeageCreate"
+    displayBlock="true">
+
+    <Page id="JaugeageCreatePage" title="Créer Jaugeage" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Panel
+                headerText="Formulaire de Jaugeage"
+             
+                class="sapUiResponsiveMargin">
+
+                <VBox class="sapUiSmallMargin">
+                    <HBox wrap="Wrap" justifyContent="SpaceBetween">
+                        <!-- Colonne 1 -->
+                        <VBox width="48%" justifyContent="SpaceBetween">
+                            <smartForm:SmartForm
+                                id="JaugeageSmartFormLeft"
+                                editable="true"
+                                entityType="YJAUGEAGE_CDSType"
+                              >
+
+                                <smartForm:Group title="Informations Generales">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_jaugeage}"  />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label="Nom Bac et Produit">
+                                            <ComboBox id="bacComboJ" items="{
+                                                path: '/YBACS_CDS',
+                                                sorter: { path: 'nom_bac' }
+                                            }"  change="onBacChange">
+                                                <items>
+                                                    <core:Item key="{id_bacs}" text="{nom_bac}  - {nom_produit}" />
+                                                </items>
+                                            </ComboBox>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{sp_ambiant}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{sp_standard}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                        </VBox>
+                    </HBox>
+
+                    <Toolbar>
+                        <ToolbarSpacer/>
+                        <Button text="Enregistrer" type="Emphasized" press="onSavePress"/>
+                        <Button text="Annuler" press="onCancelPress"/>
+                    </Toolbar>
+                </VBox>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

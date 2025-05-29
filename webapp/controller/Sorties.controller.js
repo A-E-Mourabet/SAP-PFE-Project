@@ -5,20 +5,22 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
+    "sap/ui/model/json/JSONModel",
     "project1/controller/utilities/formatter"
-], function (Controller, Filter, FilterOperator, Fragment, MessageToast, MessageBox, formatter) {
+], function (Controller, Filter, FilterOperator, Fragment, MessageToast, MessageBox, JSONModel, formatter) {
     "use strict";
 
-    return Controller.extend("project1.controller.Receptions", {
+    return Controller.extend("project1.controller.Sorties", {
         formatter: formatter,
 
         onInit: function () {
             this.oRouter = this.getOwnerComponent().getRouter();
-            const oModel = this.getOwnerComponent().getModel();
+            var oModel = this.getOwnerComponent().getModel();
             this.getView().setModel(oModel);
+
         },
 
-        onSearch: function (oEvent) {
+                onSearch: function (oEvent) {
             var sQuery = oEvent.getSource().getValue();
             var oTable = this.byId("bacsTable");
             var oBinding = oTable.getBinding("items");
@@ -31,19 +33,8 @@ sap.ui.define([
             }
         },
 
-        onListItemPress: function (oEvent) {
-            var oContext = oEvent.getSource().getBindingContext();
-            var sPath = oContext.getPath();
-            var match = sPath.match(/\((\d+)\)/);
-            var bacId = match ? match[1] : null;
-
-            if (bacId) {
-                this.oRouter.navTo("detail", { bacId: bacId });
-            }
-        },
-
-        onCreateReceptionPress: function () {
-            this.oRouter.navTo("ReceptionCreate");
+        onCreateSortiePress: function () {
+            this.oRouter.navTo("SortieCreate");
         },
 
         onRowPress: function (oEvent) {
@@ -55,50 +46,50 @@ sap.ui.define([
 
             const sPath = oContext.getPath();
 
-            if (!this._oReceptionDetailsDialog) {
+            if (!this._oSortieDetailsDialog) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "project1.view.fragments.ReceptionDetails",
+                    name: "project1.view.fragments.SortieDetails",
                     controller: this
                 }).then(function (oDialog) {
-                    this._oReceptionDetailsDialog = oDialog;
+                    this._oSortieDetailsDialog = oDialog;
                     oView.addDependent(oDialog);
                     oDialog.setBindingContext(oContext);
                     oDialog.setModel(oView.getModel());
                     oDialog.open();
                 }.bind(this));
             } else {
-                this._oReceptionDetailsDialog.setBindingContext(oContext);
-                this._oReceptionDetailsDialog.setModel(oView.getModel());
-                this._oReceptionDetailsDialog.open();
+                this._oSortieDetailsDialog.setBindingContext(oContext);
+                this._oSortieDetailsDialog.setModel(oView.getModel());
+                this._oSortieDetailsDialog.open();
             }
         },
 
         onCloseDialog: function () {
-            if (this._oReceptionDetailsDialog) {
-                this._oReceptionDetailsDialog.close();
+            if (this._oSortieDetailsDialog) {
+                this._oSortieDetailsDialog.close();
             }
         },
 
-        onEditLastReception: async function () {
+        onEditLastSortie: function () {
             const oModel = this.getView().getModel();
             const that = this;
 
-            oModel.read("/YRECEPTIONS_CDS", {
+            oModel.read("/YSORTIES_CDS", {
                 urlParameters: {
-                    "$orderby": "id_receptions desc",
+                    "$orderby": "id_sortie desc",
                     "$top": 1
                 },
                 success: async function (oData) {
                     if (oData.results.length) {
-                        const oLastReception = oData.results[0];
-                        const sPath = oModel.createKey("/YRECEPTIONS_CDS", {
-                            id_receptions: oLastReception.id_receptions
+                        const oLastSortie = oData.results[0];
+                        const sPath = oModel.createKey("/YSORTIES_CDS", {
+                            id_sortie: oLastSortie.id_sortie
                         });
 
                         if (!that._oEditDialog) {
                             that._oEditDialog = await Fragment.load({
-                                name: "project1.view.fragments.EditReceptionDialog",
+                                name: "project1.view.fragments.EditSortieDialog",
                                 id: that.getView().getId(),
                                 controller: that
                             });
@@ -117,7 +108,7 @@ sap.ui.define([
 
                         that._oEditDialog.open();
                     } else {
-                        MessageToast.show("Aucune réception trouvée.");
+                        MessageToast.show("Aucune Sortie trouvée.");
                     }
                 },
                 error: function () {
@@ -126,60 +117,62 @@ sap.ui.define([
             });
         },
 
-        onSaveEditReception: async function () {
-            const oDialog = this._oEditDialog;
+        onSaveEditSortie: async function () {
+            const oDialog = this._oEditDialog; // Doit pointer vers le fragment `editSortieDialog`
             const oModel = this.getView().getModel();
-            const oContext = oDialog.getBindingContext();
+            const oContext = oDialog?.getBindingContext();
 
             if (!oDialog || !oModel || !oContext) return;
 
             const sPath = oContext.getPath();
             let oData = Object.assign({}, oContext.getObject());
 
-            // Charger produit depuis le bac
+            // Charger produit depuis le bac sélectionné
             try {
-                const oBacData = await this._readBacProduct(oData.bac_de_reception, oModel);
+                const oBacData = await this._readBacProduct(oData.bac_source, oModel);
                 if (oBacData) {
-                    oData.produit = parseInt(oBacData.product, 10);
+                    oData.produits = parseInt(oBacData.product, 10);
                 } else {
                     MessageToast.show("Produit introuvable pour ce bac.");
                     return;
                 }
             } catch (e) {
+                console.error("Erreur lors de la récupération du produit :", e);
                 MessageToast.show("Erreur lors de la récupération du produit.");
                 return;
             }
 
-            // Nettoyage des champs non persistants
+            // Nettoyage des champs non persistants (venant de CDS associations)
             delete oData.ClientNom;
             delete oData.BacNom;
             delete oData.ProduitNom;
-            delete oData.id_receptions;
-            delete oData.id_bacs;
-            delete oData.id_clients;
-            delete oData.BacId;
-            delete oData.ClientId;
-            delete oData.ProdId;
-            delete oData.ProduitID;
+            delete oData.id_sortie;
+            // delete oData.id_clients;
+            // delete oData.BacId;
+            // delete oData.ClientId;
+            // delete oData.ProdId;
+            // delete oData.ProduitID;
 
-            // Forcer types
-            oData.fournisseurs = parseInt(oData.fournisseurs, 10);
-            oData.bac_de_reception = parseInt(oData.bac_de_reception, 10);
+            // Forcer types pour les clés étrangères
+            oData.bac_source = parseInt(oData.bac_source, 10);
+            oData.marketer = parseInt(oData.marketer, 10);
 
+            // Envoi de la mise à jour OData
             oModel.update(sPath, oData, {
                 success: () => {
-                    MessageToast.show("Réception mise à jour avec succès.");
+                    MessageToast.show("Sortie mise à jour avec succès.");
                     oDialog.close();
                 },
                 error: (oError) => {
-                    console.error("→ Error during update:", oError);
-                    MessageBox.error("Erreur lors de la mise à jour de la réception.");
+                    console.error("→ Erreur lors de la mise à jour :", oError);
+                    MessageBox.error("Erreur lors de la mise à jour de la sortie.");
                 },
                 merge: false
             });
 
-            this.dumpModelData(sPath);
+            this.dumpModelData(sPath); // À garder si utile pour debug
         },
+
 
         _readBacProduct: function (bacId, oModel) {
             return new Promise(function (resolve, reject) {
@@ -190,7 +183,7 @@ sap.ui.define([
             });
         },
 
-        onCancelEditReception: function () {
+        onCancelEditSortie: function () {
             const oModel = this.getView().getModel();
             const oDialog = this._oEditDialog;
             const oContext = oDialog ? oDialog.getBindingContext() : null;
@@ -204,7 +197,7 @@ sap.ui.define([
             }
         },
 
-        dumpModelData: function (sPath) {
+                dumpModelData: function (sPath) {
             const oModel = this.getView().getModel();
             const oData = oModel.getProperty(sPath);
             console.log("→ dumpModelData:", oData);
@@ -222,4 +215,6 @@ sap.ui.define([
             // Tu peux vérifier ici les contrôles du fragment si besoin
         }
     });
+
+    
 });

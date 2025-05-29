@@ -21,7 +21,7 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
-                    <Title text="Gestion des Bacs" />
+                    <Title text="Etat des Bacs" />
                 </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -73,11 +73,14 @@
                             showFullScreenButton="true"
                             demandPopin="true"
                             beforeRebindTable="onBeforeRebindTable"
-                            requestAtLeastFields="nom_bac,capacity,stockage,creux,toproduct_item/nom_produit"
+                            initiallyVisibleFields="nom_bac,nom_produit,capacity,stockage,creux"
+                            requestAtLeastFields="nom_bac,capacity,stockage,creux,nom_produit"
                             ignoredFields="id_bacs,product"
-                            useColumnLabelsAsTooltips="true">
+                            useColumnLabelsAsTooltips="true"
+                            useTablePersonalisation="false">
 
                             <Table>
+                            <!-- Contenu des cellules -->
                                 <ColumnListItem type="Navigation" press="onItemPress">
                                     <cells>
                                         <!-- Nom Bac -->

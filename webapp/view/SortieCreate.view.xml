@@ -1,0 +1,110 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    controllerName="project1.controller.SortieCreate"
+    displayBlock="true">
+
+    <Page id="SortieCreatePage" title="Créer Sortie" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Panel headerText="Formulaire de Sortie" class="sapUiResponsiveMargin">
+
+                <VBox class="sapUiSmallMargin">
+                    <HBox wrap="Wrap" justifyContent="SpaceBetween">
+
+                        <!-- Colonne Gauche -->
+                        <VBox width="48%">
+                            <smartForm:SmartForm id="SortieSmartFormLeft" editable="true" entityType="YSORTIES_CDSType">
+
+                                <smartForm:Group title="Informations Sortie">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_sortie}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{heure_sortie}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{num_voyage}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{bon_de_livraison}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{bon_de_charge}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{num_dum}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                                <smartForm:Group title="Volumes et Température">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_app}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{temp_app}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_15c}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_15c_add}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{coeff_astm}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                            </smartForm:SmartForm>
+                        </VBox>
+
+                        <!-- Colonne Droite -->
+                        <VBox width="48%">
+                            <smartForm:SmartForm id="SortieSmartFormRight" editable="true" entityType="YSORTIES_CDSType">
+
+                                <smartForm:Group title="Client et Produit">
+                                    <smartForm:GroupElement label="Bac Source">
+                                        <ComboBox id="bacComboS" items="{ path: '/YBACS_CDS', sorter: { path: 'nom_bac' } }">
+                                            <core:Item key="{id_bacs}" text="{nom_bac} - {nom_produit}" />
+                                        </ComboBox>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label="Client Marketer">
+                                        <ComboBox id="clientComboS" items="{ path: '/YCLIENTS_CDS', sorter: { path: 'nom_client' } }">
+                                            <core:Item key="{id_client}" text="{nom_client}" />
+                                        </ComboBox>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                                <smartForm:Group title="Véhicule">
+                                    <smartForm:GroupElement label="N° de véhicule">
+                                        <smartField:SmartField value="{num_vehicule}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label="N° de citerne">
+                                        <smartField:SmartField value="{num_citerne}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                                <smartForm:Group title="Autres">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{commentaire}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                            </smartForm:SmartForm>
+                        </VBox>
+
+                    </HBox>
+
+                    <Toolbar>
+                        <ToolbarSpacer/>
+                        <Button text="Enregistrer" type="Emphasized" press="onSavePress"/>
+                        <Button text="Annuler" press="onCancelPress"/>
+                    </Toolbar>
+                </VBox>
+
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

@@ -26,14 +26,23 @@
     </edmx:Reference>
     <edmx:DataServices>
         <Schema Namespace="ybacs_g_anno_mdl_01.v1" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <Annotations Target="YBACS_G_SRV_01.YBACS_CDSType">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="id_bacs"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
             <Annotations Target="YBACS_G_SRV_01.YCLIENTS_CDSType">
                 <Annotation Term="UI.Identification">
                     <Collection>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="nom_client"/>
+                            <PropertyValue Property="Value" Path="id_client"/>
                         </Record>
                         <Record Type="UI.DataField">
-                            <PropertyValue Property="Value" Path="id_client"/>
+                            <PropertyValue Property="Value" Path="nom_client"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -41,6 +50,9 @@
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="email_client"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="commentaire"/>
                         </Record>
                     </Collection>
                 </Annotation>
@@ -50,6 +62,37 @@
                     <Collection>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="ClientNom"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="YBACS_G_SRV_01.YSORTIES_CDSType">
+                <Annotation Term="UI.Identification">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ProduitNom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="BacNom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ClientNom"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String=""/>
+                            <PropertyValue Property="Value" Path="ClientNom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String=""/>
+                            <PropertyValue Property="Value" Path="BacNom"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Label" String=""/>
+                            <PropertyValue Property="Value" Path="ProduitNom"/>
                         </Record>
                     </Collection>
                 </Annotation>

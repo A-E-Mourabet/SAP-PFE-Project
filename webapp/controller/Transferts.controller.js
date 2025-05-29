@@ -9,7 +9,7 @@ sap.ui.define([
 ], function (Controller, Filter, FilterOperator, Fragment, MessageToast, MessageBox, formatter) {
     "use strict";
 
-    return Controller.extend("project1.controller.Receptions", {
+    return Controller.extend("project1.controller.Transferts", {
         formatter: formatter,
 
         onInit: function () {
@@ -31,19 +31,19 @@ sap.ui.define([
             }
         },
 
-        onListItemPress: function (oEvent) {
-            var oContext = oEvent.getSource().getBindingContext();
-            var sPath = oContext.getPath();
-            var match = sPath.match(/\((\d+)\)/);
-            var bacId = match ? match[1] : null;
+        // onListItemPress: function (oEvent) {
+        //     var oContext = oEvent.getSource().getBindingContext();
+        //     var sPath = oContext.getPath();
+        //     var match = sPath.match(/\((\d+)\)/);
+        //     var bacId = match ? match[1] : null;
 
-            if (bacId) {
-                this.oRouter.navTo("detail", { bacId: bacId });
-            }
-        },
+        //     if (bacId) {
+        //         this.oRouter.navTo("detail", { bacId: bacId });
+        //     }
+        // },
 
-        onCreateReceptionPress: function () {
-            this.oRouter.navTo("ReceptionCreate");
+        onCreateTransfertPress: function () {
+            this.oRouter.navTo("TransfertCreate");
         },
 
         onRowPress: function (oEvent) {
@@ -58,7 +58,7 @@ sap.ui.define([
             if (!this._oReceptionDetailsDialog) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "project1.view.fragments.ReceptionDetails",
+                    name: "project1.view.fragments.TransfertDetails",
                     controller: this
                 }).then(function (oDialog) {
                     this._oReceptionDetailsDialog = oDialog;
@@ -80,25 +80,25 @@ sap.ui.define([
             }
         },
 
-        onEditLastReception: async function () {
+        onEditLastTransfert: function () {////////////////////////////////////////////////////////////// 
             const oModel = this.getView().getModel();
             const that = this;
 
-            oModel.read("/YRECEPTIONS_CDS", {
+            oModel.read("/YTRANSFERT_BACS_CDS", {
                 urlParameters: {
-                    "$orderby": "id_receptions desc",
+                    "$orderby": "id_transfert desc",
                     "$top": 1
                 },
                 success: async function (oData) {
                     if (oData.results.length) {
                         const oLastReception = oData.results[0];
-                        const sPath = oModel.createKey("/YRECEPTIONS_CDS", {
-                            id_receptions: oLastReception.id_receptions
+                        const sPath = oModel.createKey("/YTRANSFERT_BACS_CDS", {
+                            id_transfert: oLastReception.id_transfert
                         });
 
                         if (!that._oEditDialog) {
                             that._oEditDialog = await Fragment.load({
-                                name: "project1.view.fragments.EditReceptionDialog",
+                                name: "project1.view.fragments.EditTransfertDialog",
                                 id: that.getView().getId(),
                                 controller: that
                             });
@@ -117,7 +117,7 @@ sap.ui.define([
 
                         that._oEditDialog.open();
                     } else {
-                        MessageToast.show("Aucune réception trouvée.");
+                        MessageToast.show("Aucun transfert trouvé.");
                     }
                 },
                 error: function () {
@@ -126,7 +126,7 @@ sap.ui.define([
             });
         },
 
-        onSaveEditReception: async function () {
+        onSaveEditTransfert: async function () { ///////////////////////////////////////////////////////////////
             const oDialog = this._oEditDialog;
             const oModel = this.getView().getModel();
             const oContext = oDialog.getBindingContext();
@@ -138,9 +138,21 @@ sap.ui.define([
 
             // Charger produit depuis le bac
             try {
-                const oBacData = await this._readBacProduct(oData.bac_de_reception, oModel);
+                const oBacData = await this._readBacProduct(oData.bac_source, oModel);
                 if (oBacData) {
-                    oData.produit = parseInt(oBacData.product, 10);
+                    oData.product_from = parseInt(oBacData.product, 10);
+                } else {
+                    MessageToast.show("Produit introuvable pour ce bac.");
+                    return;
+                }
+            } catch (e) {
+                MessageToast.show("Erreur lors de la récupération du produit.");
+                return;
+            }
+            try {
+                const oBacData = await this._readBacProduct(oData.bac_destination, oModel);
+                if (oBacData) {
+                    oData.product_to = parseInt(oBacData.product, 10);
                 } else {
                     MessageToast.show("Produit introuvable pour ce bac.");
                     return;
@@ -151,21 +163,23 @@ sap.ui.define([
             }
 
             // Nettoyage des champs non persistants
-            delete oData.ClientNom;
-            delete oData.BacNom;
-            delete oData.ProduitNom;
-            delete oData.id_receptions;
-            delete oData.id_bacs;
-            delete oData.id_clients;
-            delete oData.BacId;
-            delete oData.ClientId;
-            delete oData.ProdId;
-            delete oData.ProduitID;
+            // delete oData.ClientNom;
+            // delete oData.BacNom;
+            // delete oData.ProduitNom;
+            // delete oData.id_receptions;
+            // delete oData.id_bacs;
+            // delete oData.id_clients;
+            // delete oData.BacId;
+            // delete oData.ClientId;
+            // delete oData.ProdId;
+            // delete oData.ProduitID;
 
             // Forcer types
-            oData.fournisseurs = parseInt(oData.fournisseurs, 10);
-            oData.bac_de_reception = parseInt(oData.bac_de_reception, 10);
-
+            oData.bac_source = parseInt(oData.bac_source, 10);
+            oData.bac_destination = parseInt(oData.bac_destination, 10);
+            oData.product_from = parseInt(oData.product_from, 10);
+            oData.product_to = parseInt(oData.product_to, 10);
+            console.log("→ oData:", oData);
             oModel.update(sPath, oData, {
                 success: () => {
                     MessageToast.show("Réception mise à jour avec succès.");

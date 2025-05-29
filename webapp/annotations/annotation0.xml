@@ -1,0 +1,37 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+
+    <edmx:Reference Uri="/sap/opu/odata/SAP/YBACS_G_SRV_01/$metadata">
+        <edmx:Include Namespace="YBACS_G_SRV_01" Alias="SAP"/>
+    </edmx:Reference>
+
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
+            <Annotations Target="YBACS_G_SRV_01.YRECEPTIONS_CDSType/bac_de_reception">
+                <Annotation Term="Common.ValueList" Qualifier="BacsVH">
+                    <Record>
+                        <PropertyValue Property="Label" String="Bac Value Help"/>
+                        <PropertyValue Property="CollectionPath" String="YBACS_CDS"/>
+                        <PropertyValue Property="SearchSupported" Bool="true"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <!-- Local to value help: bac_de_reception -> id_bacs -->
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="bac_de_reception"/>
+                                    <PropertyValue Property="ValueListProperty" String="id_bacs"/>
+                                </Record>
+
+                                <!-- Optional: value help display text -->
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="nom_bac"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

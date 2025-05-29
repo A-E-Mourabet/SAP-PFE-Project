@@ -4,12 +4,12 @@
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
           xmlns:smartTable="sap.ui.comp.smarttable"
           xmlns:uxap="sap.uxap"
-          controllerName="project1.controller.Receptions"
+          controllerName="project1.controller.Sorties"
           displayBlock="true"
           height="100%">
 
     <uxap:ObjectPageLayout
-        id="objectPageLayout"
+        id="objectPageLayout3"
         showTitleInHeaderContent="true"
         alwaysShowContentHeader="false"
         preserveHeaderStateOnScroll="false"
@@ -21,14 +21,14 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
-                    <Title text="Gestion des Réceptions" />
+                    <Title text="Gestion des Sorties" />
                 </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
         <!-- Header Content (Optional) -->
         <uxap:headerContent>
-            <Text text="Filtres disponibles pour les réceptions ci-dessous" />
+            <Text text="Filtres disponibles pour les sorties ci-dessous" />
         </uxap:headerContent>
 
         <!-- FIRST SECTION: SMART FILTER BAR -->
@@ -37,8 +37,8 @@
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartFilterBar:SmartFilterBar
-                            id="receptionsSmartFilter"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="SortiesSmartFilter"
+                            entitySet="YSORTIES_CDS"
                             useToolbar="true"
                             useSnapshot="true"
                             showGoOnFB="true"
@@ -55,18 +55,18 @@
         </uxap:ObjectPageSection>
 
         <!-- SECOND SECTION: SMART TABLE -->
-        <uxap:ObjectPageSection title="Liste des Réceptions">
+        <uxap:ObjectPageSection title="Liste des sorties">
             <uxap:subSections>
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartTable:SmartTable
                         
-                            id="receptionsSmartTable"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="sortiesSmartTable"
+                            entitySet="YSORTIES_CDS"
                             tableType="ResponsiveTable"
                             enableExport="true"
                             useVariantManagement="false"
-                            header="Liste des réceptions"
+                            header="Liste des sorties"
                             smartFilterId="receptionsSmartFilter"
                             persistencyKey="ReceptionsSmartTablePersistencyKey"
                             enableAutoBinding="true"
@@ -75,26 +75,26 @@
                             showFullScreenButton="true"
                             demandPopin="true"
                             useTablePersonalisation="false"
-                            initiallyVisibleFields="date_reception,BacNom,ProduitNom,ClientNom,volume_recu_app,temp_bac"
-                            requestAtLeastFields="date_reception,heure_reception,volume_expedie_std,volume_recu_std,volume_recu_app,temp_bac,densite,coeff_astm,BacNom,ProduitNom,ClientNom,bon_livraison,navire,commentaire"
+                            initiallyVisibleFields="date_sortie,BacNom,ProduitNom,ClientNom,volume_15c,temp_app"
+                            requestAtLeastFields="date_sortie,heure_sortie,marketer,num_voyage,bon_de_charge,bon_de_livraison,num_vehicule,num_citerne,produits,bac_source,volume_app,temp_app,volume_15c,volume_15c_add,num_dum,coeff_astm,commentaire"
                             ignoredFields="">
                             <smartTable:customToolbar>
                                 <Toolbar>
                                     <ToolbarSpacer />
                                     <Button
-                                        text="Modifier la dernière réception"
+                                        text="Modifier la dernière Sortie"
                                         icon="sap-icon://edit"
-                                        press=".onEditLastReception" />
+                                        press=".onEditLastSortie" />
                                     <Button
-                                        text="Créer Réception"
+                                        text="Créer Sortie"
                                         icon="sap-icon://add"
-                                        press=".onCreateReceptionPress" />
+                                        press=".onCreateSortiePress" />
                                     
                                 </Toolbar>
                             </smartTable:customToolbar>
                             <!-- Your custom inner Table -->
                             <Table
-                                id="innerReceptionsTable"
+                                id="innerSortieTable"
                                 mode="SingleSelectMaster"
                                 growing="true"
                                 growingThreshold="20"
@@ -105,12 +105,12 @@
                                 <items>
                                     <ColumnListItem type="Navigation" press=".onRowPress">
                                         <cells>
-                                            <Text text="{ path:'date_reception' , formatter : '.formatter.formatDate'}" />
+                                            <Text text="{ path:'date_sortie' , formatter : '.formatter.formatDate'}" />
                                             <Text text="{BacNom}" />
                                             <Text text="{ProduitNom}" />
                                             <Text text="{ClientNom}" />
-                                            <Text text="{ path: 'volume_recu_app', formatter: '.formatter.formatNumber' }" />
-                                            <Text text="{ path: 'temp_bac', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'volume_15c', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'temp_app', formatter: '.formatter.formatNumber' }" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>

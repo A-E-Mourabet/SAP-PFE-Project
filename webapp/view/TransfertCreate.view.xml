@@ -1,0 +1,75 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    controllerName="project1.controller.TransfertCreate"
+    displayBlock="true">
+
+    <Page id="TransfertCreatePage" title="Créer un Transfert de Bac" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Panel headerText="Formulaire de Transfert" class="sapUiResponsiveMargin">
+                <VBox class="sapUiSmallMargin">
+                    <HBox wrap="Wrap" justifyContent="SpaceBetween">
+
+                        <!-- Colonne Gauche : Informations générales -->
+                        <VBox width="48%" class="sapUiResponsiveMargin">
+                            <smartForm:SmartForm id="TransfertSmartFormLeft" editable="true" entityType="YTRANSFERT_BACS_CDS">
+                                <smartForm:Group title="Informations Générales">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_transfert}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{heure_transfert}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{commentaire}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                        </VBox>
+
+                        <!-- Colonne Droite : Bac Source + Bac Destination (superposés) -->
+                        <VBox width="48%" class="sapUiResponsiveMargin">
+                            <smartForm:SmartForm id="TransfertSmartFormRight" editable="true" entityType="YTRANSFERT_BACS_CDS">
+                                
+                                <!-- Bac Source -->
+                                <smartForm:Group title="Bac Source">
+                                    <smartForm:GroupElement label="Bac et Produit Source">
+                                        <ComboBox id="SourceComboT" items="{ path: '/YBACS_CDS', sorter: { path: 'nom_bac' } }">
+                                            <core:Item key="{id_bacs}" text="{nom_bac} - {nom_produit}" />
+                                        </ComboBox>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_expedie}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                                <!-- Bac Destination -->
+                                <smartForm:Group title="Bac Destination">
+                                    <smartForm:GroupElement label="Bac et Produit Destination">
+                                        <ComboBox id="DestComboT" items="{ path: '/YBACS_CDS', sorter: { path: 'nom_bac' } }">
+                                            <core:Item key="{id_bacs}" text="{nom_bac} - {nom_produit}" />
+                                        </ComboBox>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_recu}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                            </smartForm:SmartForm>
+                        </VBox>
+                    </HBox>
+
+                    <!-- Boutons -->
+                    <Toolbar>
+                        <ToolbarSpacer/>
+                        <Button text="Enregistrer" type="Emphasized" icon="sap-icon://save" press=".onSavePress" />
+                        <Button text="Annuler" icon="sap-icon://decline" press=".onCancelPress" />
+                    </Toolbar>
+                </VBox>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

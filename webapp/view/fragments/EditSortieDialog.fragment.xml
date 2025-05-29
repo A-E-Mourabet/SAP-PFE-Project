@@ -1,0 +1,107 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:formatter="project1.controller.utilities.formatter">
+
+    <Dialog id="editSortieDialog" title="Modifier Sortie" contentWidth="900px" contentHeight="auto" draggable="true" resizable="true" class="sapUiResponsivePadding">
+        <layout:VerticalLayout>
+            <HBox justifyContent="SpaceBetween" renderType="Div">
+
+                <!-- Colonne Gauche -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="true" id="EditSortieFormLeft">
+                        
+                        <smartForm:Group title="Informations Sortie">
+                            <smartForm:GroupElement label="Date Sortie">
+                                <smartField:SmartField value="{date_sortie}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Heure Sortie">
+                                <smartField:SmartField value="{heure_sortie}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Température Apparente">
+                                <smartField:SmartField value="{temp_app}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Apparent">
+                                <smartField:SmartField value="{volume_app}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume 15°C">
+                                <smartField:SmartField value="{volume_15c}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume 15°C Add.">
+                                <smartField:SmartField value="{volume_15c_add}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="N° Véhicule">
+                                <smartField:SmartField value="{num_vehicule}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="N° Citerne">
+                                <smartField:SmartField value="{num_citerne}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="N° DUM">
+                                <smartField:SmartField value="{num_dum}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Coefficient ASTM">
+                                <smartField:SmartField value="{coeff_astm}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Commentaire">
+                                <smartField:SmartField value="{commentaire}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+                <!-- Colonne Droite -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="true" id="EditSortieFormRight">
+
+                        <smartForm:Group title="Bac et Client">
+                            <smartForm:GroupElement label="Bac Source">
+                                <ComboBox id="editBacCombo"  items="{
+                                    path: '/YBACS_CDS',
+                                    sorter: { path: 'nom_bac' }
+                                }" 
+                                selectedKey="{bac_source}">
+                                    <core:Item key="{id_bacs}" text="{nom_bac} - {nom_produit}" />
+                                </ComboBox>
+                            </smartForm:GroupElement>
+
+                            <smartForm:GroupElement label="Client Marketer">
+                                <ComboBox id="editClientCombo" items="{
+                                    path: '/YCLIENTS_CDS',
+                                    sorter: { path: 'nom_client' }
+                                }" 
+                                selectedKey="{marketer}">
+                                    <core:Item key="{id_client}" text="{nom_client}" />
+                                </ComboBox>
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Détails Transport">
+                            <smartForm:GroupElement label="N° de Voyage">
+                                <smartField:SmartField value="{num_voyage}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Charge">
+                                <smartField:SmartField value="{bon_de_charge}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Livraison">
+                                <smartField:SmartField value="{bon_de_livraison}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+            </HBox>
+
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Enregistrer" type="Emphasized" press=".onSaveEditSortie"/>
+                <Button text="Annuler" press=".onCancelEditSortie"/>
+            </Toolbar>
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

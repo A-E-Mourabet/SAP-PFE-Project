@@ -4,12 +4,12 @@
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
           xmlns:smartTable="sap.ui.comp.smarttable"
           xmlns:uxap="sap.uxap"
-          controllerName="project1.controller.Receptions"
+          controllerName="project1.controller.Transferts"
           displayBlock="true"
           height="100%">
 
     <uxap:ObjectPageLayout
-        id="objectPageLayout"
+        id="objectPageLayout4"
         showTitleInHeaderContent="true"
         alwaysShowContentHeader="false"
         preserveHeaderStateOnScroll="false"
@@ -21,14 +21,14 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
-                    <Title text="Gestion des Réceptions" />
+                    <Title text="Gestion des Transfert" />
                 </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
         <!-- Header Content (Optional) -->
         <uxap:headerContent>
-            <Text text="Filtres disponibles pour les réceptions ci-dessous" />
+            <Text text="Filtres disponibles pour les transferts ci-dessous" />
         </uxap:headerContent>
 
         <!-- FIRST SECTION: SMART FILTER BAR -->
@@ -37,13 +37,13 @@
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartFilterBar:SmartFilterBar
-                            id="receptionsSmartFilter"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="transfertSmartFilter"
+                            entitySet="YTRANSFERT_BACS_CDS"
                             useToolbar="true"
                             useSnapshot="true"
                             showGoOnFB="true"
                             enableBasicSearch="true"
-                            persistencyKey="ReceptionsSmartFilterPersistencyKey">
+                            persistencyKey="TransfertsSmartFilterPersistencyKey">
                             <smartFilterBar:customData>
                                 <core:CustomData key="defaultFilterBarExpanded" value="{}"/>
                                 <core:CustomData key="defaultShowAllFilters" value="{}"/>
@@ -55,46 +55,46 @@
         </uxap:ObjectPageSection>
 
         <!-- SECOND SECTION: SMART TABLE -->
-        <uxap:ObjectPageSection title="Liste des Réceptions">
+        <uxap:ObjectPageSection title="Liste des Transferts">
             <uxap:subSections>
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartTable:SmartTable
                         
-                            id="receptionsSmartTable"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="transfertssSmartTable"
+                            entitySet="YTRANSFERT_BACS_CDS"
                             tableType="ResponsiveTable"
                             enableExport="true"
                             useVariantManagement="false"
-                            header="Liste des réceptions"
-                            smartFilterId="receptionsSmartFilter"
-                            persistencyKey="ReceptionsSmartTablePersistencyKey"
+                            header="Liste des transferts"
+                            smartFilterId="transfertSmartFilter"
+                            persistencyKey="TransfertsSmartTablePersistencyKey"
                             enableAutoBinding="true"
                             showRowCount="true"
                             class="sapUiResponsiveContentPadding"
                             showFullScreenButton="true"
                             demandPopin="true"
                             useTablePersonalisation="false"
-                            initiallyVisibleFields="date_reception,BacNom,ProduitNom,ClientNom,volume_recu_app,temp_bac"
-                            requestAtLeastFields="date_reception,heure_reception,volume_expedie_std,volume_recu_std,volume_recu_app,temp_bac,densite,coeff_astm,BacNom,ProduitNom,ClientNom,bon_livraison,navire,commentaire"
+                            initiallyVisibleFields="date_transfert,BacSource,BacDestination,ProduitSource,volume_expedie,volume_recu"
+                            requestAtLeastFields="date_transfert,heure_transfert,bac_source,bac_destination,product_from,product_to,volume_expedie,volume_recu,commentaire , BacSource , ProduitSource , BacDestination , ProduitDestination, commentaire,id_transfert"
                             ignoredFields="">
                             <smartTable:customToolbar>
                                 <Toolbar>
                                     <ToolbarSpacer />
                                     <Button
-                                        text="Modifier la dernière réception"
+                                        text="Modifier le dernier transfert"
                                         icon="sap-icon://edit"
-                                        press=".onEditLastReception" />
+                                        press=".onEditLastTransfert" />
                                     <Button
-                                        text="Créer Réception"
+                                        text="Créer Transfert"
                                         icon="sap-icon://add"
-                                        press=".onCreateReceptionPress" />
+                                        press=".onCreateTransfertPress" />
                                     
                                 </Toolbar>
                             </smartTable:customToolbar>
                             <!-- Your custom inner Table -->
                             <Table
-                                id="innerReceptionsTable"
+                                id="innerTransfertTable"
                                 mode="SingleSelectMaster"
                                 growing="true"
                                 growingThreshold="20"
@@ -105,12 +105,12 @@
                                 <items>
                                     <ColumnListItem type="Navigation" press=".onRowPress">
                                         <cells>
-                                            <Text text="{ path:'date_reception' , formatter : '.formatter.formatDate'}" />
-                                            <Text text="{BacNom}" />
-                                            <Text text="{ProduitNom}" />
-                                            <Text text="{ClientNom}" />
-                                            <Text text="{ path: 'volume_recu_app', formatter: '.formatter.formatNumber' }" />
-                                            <Text text="{ path: 'temp_bac', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path:'date_transfert' , formatter : '.formatter.formatDate'}" />
+                                            <Text text="{BacSource}" />
+                                            <Text text="{BacDestination}" />
+                                            <Text text="{ProduitSource}" />
+                                            <Text text="{ path: 'volume_expedie', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'volume_recu', formatter: '.formatter.formatNumber' }" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>

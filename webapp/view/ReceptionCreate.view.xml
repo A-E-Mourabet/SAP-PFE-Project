@@ -9,79 +9,111 @@
 
     <Page id="ReceptionCreatePage" title="Créer Réception" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <layout:VerticalLayout>
-                <smartForm:SmartForm
-                    id="ReceptionSmartForm"
-                    editable="true"
-                    entityType="YRECEPTIONS_CDSType"
-                    useHorizontalLayout="true">
+            <Panel
+                headerText="Formulaire de Réception"
+                expandable="false"
+                class="sapUiResponsiveMargin">
 
-                    <!-- Group 1: Informations Réception -->
-                    <smartForm:Group label="Informations Réception">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{date_reception}"  />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{heure_reception}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{volume_expedie_std}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{volume_recu_std}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{volume_recu_app}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{temp_bac}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{densite}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{coeff_astm}" />
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
+                <VBox class="sapUiSmallMargin">
+                    <HBox wrap="Wrap" justifyContent="SpaceBetween">
+                        <!-- Colonne 1 -->
+                        <VBox width="48%" justifyContent="SpaceBetween">
+                            <smartForm:SmartForm
+                                id="ReceptionSmartFormLeft"
+                                editable="true"
+                                entityType="YRECEPTIONS_CDSType"
+                                useHorizontalLayout="false">
 
-                    <!-- Group 2: Bac & Produit -->
-                    <smartForm:Group label="Bac et Produit">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{bac_de_reception}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{produit}" />
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
+                                <smartForm:Group title="Informations Réception">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_reception}"  />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{heure_reception}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_expedie_std}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_recu_std}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{volume_recu_app}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{temp_bac}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{densite}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{coeff_astm}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                            </smartForm:SmartForm>
+                        </VBox>
 
-                    <!-- Group 3: Client -->
-                    <smartForm:Group label="Client">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{fournisseurs}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{bon_livraison}" />
-                        </smartForm:GroupElement>
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{navire}" />
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
+                        <!-- Colonne 2 -->
+                        <VBox width="48%">
+                            <smartForm:SmartForm
+                                id="ReceptionSmartFormRight"
+                                editable="true"
+                                entityType="YRECEPTIONS_CDSType"
+                                useHorizontalLayout="true">
 
-                    <!-- Group 4: Autres -->
-                    <smartForm:Group label="Autres">
-                        <smartForm:GroupElement>
-                            <smartField:SmartField value="{commentaire}" />
-                        </smartForm:GroupElement>
-                    </smartForm:Group>
+                                <smartForm:Group title="Bac et Produit">
+                                    <smartForm:GroupElement label="Nom Bac et Produit">
+                                        <VBox>
+                                            <ComboBox id="bacCombo" items="{
+                                                path: '/YBACS_CDS',
+                                                sorter: { path: 'nom_bac' }
+                                            }"  change="onBacChange">
+                                                <items>
+                                                    <core:Item key="{id_bacs}" text="{nom_bac}  - {nom_produit}" />
+                                                </items>
+                                            </ComboBox>
+                                        </VBox>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
 
-                </smartForm:SmartForm>
+                                <smartForm:Group title="Client">
+                                    <smartForm:GroupElement label="Nom Client">
+                                        <VBox>
+                                            <ComboBox id="clientCombo" items="{
+                                                path: '/YCLIENTS_CDS',
+                                                sorter: { path: 'nom_client' }
+                                            }" change="onClientChange">
+                                                <items>
+                                                    <core:Item key="{id_client}" text="{nom_client}" />
+                                                </items>
+                                            </ComboBox>
+                                        </VBox>
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{bon_livraison}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{navire}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
 
-                <Toolbar>
-                    <ToolbarSpacer/>
-                    <Button text="Enregistrer" type="Emphasized" press="onSavePress"/>
-                    <Button text="Annuler" press="onCancelPress"/>
-                </Toolbar>
-            </layout:VerticalLayout>
+                                <smartForm:Group title="Autres">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{commentaire}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                            </smartForm:SmartForm>
+                        </VBox>
+                    </HBox>
+
+                    <Toolbar>
+                        <ToolbarSpacer/>
+                        <Button text="Enregistrer" type="Emphasized" press="onSavePress"/>
+                        <Button text="Annuler" press="onCancelPress"/>
+                    </Toolbar>
+                </VBox>
+            </Panel>
         </content>
     </Page>
 </mvc:View>

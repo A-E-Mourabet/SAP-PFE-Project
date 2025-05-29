@@ -13,14 +13,11 @@ sap.ui.define([
                 const intent = hash.split("project1-")[1].split("?")[0]; // ex: "product", "copy", etc.
 
                 switch (intent) {
-                    case "product":
-                        oRouter.navTo("product");
+                    case "etatbacs":
+                        oRouter.navTo("etatbacs");
                         break;
                     case "copy":
                         oRouter.navTo("copy");
-                        break;
-                    case "etatbacs":
-                        oRouter.navTo("etatbacs");
                         break;
                     case "receptions":
                         oRouter.navTo("receptions");
@@ -34,8 +31,8 @@ sap.ui.define([
                     case "jaugeage":
                         oRouter.navTo("jaugeage");
                         break;
-                    case "rapportbac":
-                        oRouter.navTo("rapportbac");
+                    case "RapportBacFilter":
+                        oRouter.navTo("RapportBacFilter");
                         break;
                     case "rapportgl":
                         oRouter.navTo("rapportgl");
@@ -45,7 +42,7 @@ sap.ui.define([
                         break;
                     default:
                         console.warn("Intent non reconnu :", intent);
-                        oRouter.navTo("notFound"); // ou une page par défaut
+                        oRouter.navTo("Shell-home"); // ou une page par défaut
                 }
             }
         }

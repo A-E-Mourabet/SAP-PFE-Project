@@ -1,0 +1,65 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:formatter="project1.controller.utilities.formatter">
+
+    <Dialog id="editJaugeageDialog" title="Modifier Sortie" contentWidth="900px" contentHeight="auto" draggable="true" resizable="true" class="sapUiResponsivePadding">
+        <layout:VerticalLayout>
+            <HBox justifyContent="SpaceBetween" renderType="Div">
+
+                <!-- Column 1: Group 1 only -->
+                <VBox width="48%" justifyContent="Start">
+                    <smartForm:SmartForm
+                        editable="true"
+                        entityType="YJAUGEAGE_CDSType">
+                        
+                        <smartForm:Group title="Informations Generales">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_jaugeage}"  />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label="Nom Bac et Produit">
+                                            <ComboBox id="bacComboJE" items="{
+                                                path: '/YBACS_CDS',
+                                                sorter: { path: 'id_bacs' }
+                                            }"  change="onBacChange"
+                                            selectedKey="{bac_concerne}">
+                                                <items>
+                                                    <core:Item key="{id_bacs}" text="{nom_bac}  - {nom_produit}" />
+                                                </items>
+                                            </ComboBox>
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+                 <VBox width="48%" justifyContent="End">
+                    <smartForm:SmartForm
+                        editable="true"
+                        entityType="YJAUGEAGE_CDSType">
+                        
+                        <smartForm:Group title=" Volumes Jaugées">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{sp_ambiant}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{sp_standard}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+            </HBox>
+
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Enregistrer" type="Emphasized" press=".onSaveEditJaugeage"/>
+                <Button text="Annuler" press=".onCancelEditJaugeage"/>
+            </Toolbar>
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

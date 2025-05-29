@@ -5,16 +5,17 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/m/MessageToast",
     "sap/m/MessageBox",
+    "sap/ui/model/json/JSONModel",
     "project1/controller/utilities/formatter"
-], function (Controller, Filter, FilterOperator, Fragment, MessageToast, MessageBox, formatter) {
+], function (Controller, Filter, FilterOperator, Fragment, MessageToast, MessageBox,JSONModel, formatter) {
     "use strict";
 
-    return Controller.extend("project1.controller.Receptions", {
+    return Controller.extend("project1.controller.Jaugeage", {
         formatter: formatter,
 
         onInit: function () {
             this.oRouter = this.getOwnerComponent().getRouter();
-            const oModel = this.getOwnerComponent().getModel();
+            var oModel = this.getOwnerComponent().getModel();
             this.getView().setModel(oModel);
         },
 
@@ -31,19 +32,20 @@ sap.ui.define([
             }
         },
 
-        onListItemPress: function (oEvent) {
-            var oContext = oEvent.getSource().getBindingContext();
-            var sPath = oContext.getPath();
-            var match = sPath.match(/\((\d+)\)/);
-            var bacId = match ? match[1] : null;
+        // onListItemPress: function (oEvent) {
+        //     var oContext = oEvent.getSource().getBindingContext();
+        //     var sPath = oContext.getPath();
+        //     var match = sPath.match(/\((\d+)\)/);
+        //     var bacId = match ? match[1] : null;
 
-            if (bacId) {
-                this.oRouter.navTo("detail", { bacId: bacId });
-            }
-        },
+        //     if (bacId) {
+        //         this.oRouter.navTo("detail", { bacId: bacId });
+        //     }
+        // },
 
-        onCreateReceptionPress: function () {
-            this.oRouter.navTo("ReceptionCreate");
+        onCreateJaugeagePress: function () {
+            console.log("onCreateJaugeagePress called");
+            this.oRouter.navTo("JaugeageCreate");
         },
 
         onRowPress: function (oEvent) {
@@ -58,7 +60,7 @@ sap.ui.define([
             if (!this._oReceptionDetailsDialog) {
                 Fragment.load({
                     id: oView.getId(),
-                    name: "project1.view.fragments.ReceptionDetails",
+                    name: "project1.view.fragments.JaugeageDetails",
                     controller: this
                 }).then(function (oDialog) {
                     this._oReceptionDetailsDialog = oDialog;
@@ -80,25 +82,25 @@ sap.ui.define([
             }
         },
 
-        onEditLastReception: async function () {
+        onEditLastJaugeage: function () {////////////////////////////////////////////////////////////// 
             const oModel = this.getView().getModel();
             const that = this;
 
-            oModel.read("/YRECEPTIONS_CDS", {
+            oModel.read("/YJAUGEAGE_CDS", {
                 urlParameters: {
-                    "$orderby": "id_receptions desc",
+                    "$orderby": "id_jaugeage desc",
                     "$top": 1
                 },
                 success: async function (oData) {
                     if (oData.results.length) {
                         const oLastReception = oData.results[0];
-                        const sPath = oModel.createKey("/YRECEPTIONS_CDS", {
-                            id_receptions: oLastReception.id_receptions
+                        const sPath = oModel.createKey("/YJAUGEAGE_CDS", {
+                            id_jaugeage: oLastReception.id_jaugeage
                         });
 
                         if (!that._oEditDialog) {
                             that._oEditDialog = await Fragment.load({
-                                name: "project1.view.fragments.EditReceptionDialog",
+                                name: "project1.view.fragments.EditJaugeageDialog",
                                 id: that.getView().getId(),
                                 controller: that
                             });
@@ -117,7 +119,7 @@ sap.ui.define([
 
                         that._oEditDialog.open();
                     } else {
-                        MessageToast.show("Aucune réception trouvée.");
+                        MessageToast.show("Aucun jaugeage trouvé.");
                     }
                 },
                 error: function () {
@@ -126,7 +128,7 @@ sap.ui.define([
             });
         },
 
-        onSaveEditReception: async function () {
+        onSaveEditJaugeage: async function () { ///////////////////////////////////////////////////////////////
             const oDialog = this._oEditDialog;
             const oModel = this.getView().getModel();
             const oContext = oDialog.getBindingContext();
@@ -135,45 +137,15 @@ sap.ui.define([
 
             const sPath = oContext.getPath();
             let oData = Object.assign({}, oContext.getObject());
-
-            // Charger produit depuis le bac
-            try {
-                const oBacData = await this._readBacProduct(oData.bac_de_reception, oModel);
-                if (oBacData) {
-                    oData.produit = parseInt(oBacData.product, 10);
-                } else {
-                    MessageToast.show("Produit introuvable pour ce bac.");
-                    return;
-                }
-            } catch (e) {
-                MessageToast.show("Erreur lors de la récupération du produit.");
-                return;
-            }
-
-            // Nettoyage des champs non persistants
-            delete oData.ClientNom;
-            delete oData.BacNom;
-            delete oData.ProduitNom;
-            delete oData.id_receptions;
-            delete oData.id_bacs;
-            delete oData.id_clients;
-            delete oData.BacId;
-            delete oData.ClientId;
-            delete oData.ProdId;
-            delete oData.ProduitID;
-
-            // Forcer types
-            oData.fournisseurs = parseInt(oData.fournisseurs, 10);
-            oData.bac_de_reception = parseInt(oData.bac_de_reception, 10);
-
+            console.log("→ oData:", oData);
             oModel.update(sPath, oData, {
                 success: () => {
-                    MessageToast.show("Réception mise à jour avec succès.");
+                    MessageToast.show("Jaugeage mise à jour avec succès.");
                     oDialog.close();
                 },
                 error: (oError) => {
                     console.error("→ Error during update:", oError);
-                    MessageBox.error("Erreur lors de la mise à jour de la réception.");
+                    MessageBox.error("Erreur lors de la mise à jour du jaugeage.");
                 },
                 merge: false
             });
@@ -218,8 +190,5 @@ sap.ui.define([
             }
         },
 
-        _checkDialogControls: function () {
-            // Tu peux vérifier ici les contrôles du fragment si besoin
-        }
     });
 });

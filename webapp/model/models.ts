@@ -3,6 +3,6 @@ import Device from "sap/ui/Device";
 
 export function createDeviceModel () {
     const model = new JSONModel(Device);
-    model.setDefaultBindingMode("OneWay");
+    model.setDefaultBindingMode("TwoWay");
     return model;
 }

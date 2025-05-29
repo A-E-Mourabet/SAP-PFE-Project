@@ -130,7 +130,62 @@ sap.ui.define([
                     oTemplate.addCell(oCell);
                 });
             }
+        },
+
+        onBeforeExport: function(oEvent) {
+            var oSmartTable = oEvent.getSource();
+            var oTable = oSmartTable.getTable(); // The inner ResponsiveTable
+
+            // Create an export object (using sap.ui.export library)
+            var aCols = [
+                { label: "Nom Bac", property: "nom_bac" },
+                { label: "Nom Produit", property: "nom_produit" },
+                { label: "Capacity", property: "capacity", type: 'number' },
+                { label: "Stockage", property: "stockage", type: 'number' },
+                { label: "Creux", property: "creux", type: 'number' }
+            ];
+
+            // Get the binding data from the table
+            var oBinding = oTable.getBinding("items");
+            var aItems = oBinding.getContexts();
+
+            // Build export data array
+            var aExportData = aItems.map(function(oContext) {
+                var oData = oContext.getObject();
+                return {
+                    nom_bac: oData.nom_bac,
+                    nom_produit: oData.nom_produit,
+                    capacity: oData.capacity,
+                    stockage: oData.stockage,
+                    creux: oData.creux
+                };
+            });
+
+            // Import the export library
+            sap.ui.require(["sap/ui/export/Spreadsheet"], function(Spreadsheet) {
+                var oSettings = {
+                    workbook: {
+                        columns: aCols
+                    },
+                    dataSource: aExportData,
+                    fileName: "Liste_Bacs.xlsx",
+                    worker: false // Disable web worker for compatibility
+                };
+
+                var oSheet = new Spreadsheet(oSettings);
+                oSheet.build()
+                    .then(function() {
+                        sap.m.MessageToast.show("Export réussi !");
+                    })
+                    .catch(function(sError) {
+                        sap.m.MessageBox.error("Erreur lors de l'export : " + sError);
+                    });
+            });
+
+            // Prevent default export, since we do manual export
+            oEvent.preventDefault();
         }
+
 
     });
 });

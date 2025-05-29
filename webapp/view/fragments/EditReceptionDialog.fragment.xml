@@ -1,0 +1,106 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout">
+
+    <Dialog title="Modifier la dernière réception" contentWidth="900px" draggable="true" resizable="true" class="sapUiResponsivePadding" >
+        <layout:VerticalLayout>
+            
+            <HBox justifyContent="SpaceBetween" renderType="Div">
+
+                <!-- Colonne 1 -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="true" id="editReceptionFormLeft">
+                        <smartForm:Group title="Informations Réception">
+                            <smartForm:GroupElement label="Date Réception">
+                                <smartField:SmartField value="{path: 'date_reception'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Heure Réception">
+                                <smartField:SmartField value="{path: 'heure_reception'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Expédié (STD)">
+                                <smartField:SmartField value="{path: 'volume_expedie_std'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Reçu (STD)">
+                                <smartField:SmartField value="{path: 'volume_recu_std'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Reçu (App)">
+                                <smartField:SmartField value="{path: 'volume_recu_app'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Température Bac">
+                                <smartField:SmartField value="{path: 'temp_bac'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Densité">
+                                <smartField:SmartField value="{path: 'densite'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Coefficient ASTM">
+                                <smartField:SmartField value="{path: 'coeff_astm'}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+                    </smartForm:SmartForm>
+                </VBox>
+
+                <!-- Colonne 2 -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="true" id="editReceptionFormRight">
+                        
+                        <smartForm:Group title="Bac et Produit">
+                            <smartForm:GroupElement label="Nom Bac et Produit">
+                                        <VBox>
+                                            <ComboBox id="bacComboEdit" items="{
+                                                path: '/YBACS_CDS',
+                                                sorter: { path: 'nom_bac' }
+                                            }"  change="onBacChange"
+                                             selectedKey="{bac_de_reception}">
+                                                <items>
+                                                    <core:Item key="{id_bacs}" text="{nom_bac}  - {nom_produit}" />
+                                                </items>
+                                            </ComboBox>
+                                        </VBox>
+                                </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Client">
+                                <smartForm:GroupElement label="Nom Client">
+                                        <VBox>
+                                            <ComboBox id="clientComboEdit" items="{
+                                                path: '/YCLIENTS_CDS',
+                                                sorter: { path: 'nom_client' }
+                                            }" change="onClientChange"
+                                            selectedKey="{fournisseurs}">
+                                                <items>
+                                                    <core:Item key="{id_client}" text="{nom_client}" />
+                                                </items>
+                                            </ComboBox>
+                                        </VBox>
+                                    </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Livraison">
+                                <smartField:SmartField value="{path: 'bon_livraison'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Navire">
+                                <smartField:SmartField value="{path: 'navire'}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Autres">
+                            <smartForm:GroupElement label="Commentaire">
+                                <smartField:SmartField value="{path: 'commentaire'}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+            </HBox>
+
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Annuler" press=".onCancelEditReception"/>
+                <Button text="Enregistrer" type="Emphasized" press=".onSaveEditReception"/>
+            </Toolbar>
+
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

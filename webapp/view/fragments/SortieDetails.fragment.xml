@@ -1,0 +1,104 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns:formatter="project1.controller.utilities.formatter">
+
+    <Dialog id="sortieDetailsDialog" title="Détails Sortie" contentWidth="900px" contentHeight="auto" draggable="true" resizable="true" class="sapUiResponsivePadding">
+        <layout:VerticalLayout>
+            
+            <!-- Two-column layout -->
+            <HBox justifyContent="SpaceBetween" renderType="Div">
+                
+                <!-- Left Column -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="false" entityType="YSORTIES_CDSType">
+
+                        <smartForm:Group title="Informations Sortie">
+                            <smartForm:GroupElement label="Date Sortie">
+                                <smartField:SmartField value="{date_sortie}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Heure Sortie">
+                                <smartField:SmartField value="{heure_sortie}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Numéro Voyage">
+                                <smartField:SmartField value="{num_voyage}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Livraison">
+                                <smartField:SmartField value="{bon_de_livraison}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Charge">
+                                <smartField:SmartField value="{bon_de_charge}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Numéro DUM">
+                                <smartField:SmartField value="{num_dum}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Volumes et Température">
+                            <smartForm:GroupElement label="Volume Apparent">
+                                <Text text="{path: 'volume_app', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Température App.">
+                                <Text text="{path: 'temp_app', formatter: '.formatter.formatNumber'} °C" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume 15°C">
+                                <Text text="{path: 'volume_15c', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume 15°C Add.">
+                                <Text text="{path: 'volume_15c_add', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Coefficient ASTM">
+                                <Text text="{path: 'coeff_astm', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+                <!-- Right Column -->
+                <VBox width="48%">
+                    <smartForm:SmartForm editable="false" entityType="YSORTIES_CDSType">
+
+                        <smartForm:Group title="Client et Produit">
+                            <smartForm:GroupElement label="Nom Client">
+                                <smartField:SmartField value="{ClientNom}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Nom Bac">
+                                <smartField:SmartField value="{BacNom}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Produit">
+                                <smartField:SmartField value="{ProduitNom}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Véhicule">
+                            <smartForm:GroupElement label="Numéro Véhicule">
+                                <smartField:SmartField value="{num_vehicule}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Numéro Citerne">
+                                <smartField:SmartField value="{num_citerne}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Autres">
+                            <smartForm:GroupElement label="Commentaire">
+                                <smartField:SmartField value="{commentaire}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+            </HBox>
+
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Fermer" press=".onCloseDialog" />
+            </Toolbar>
+
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

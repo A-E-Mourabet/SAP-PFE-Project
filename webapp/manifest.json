@@ -1,357 +1,439 @@
 {
-    "_version": "1.53.0",
-    "sap.app": {
-        "id": "project1",
-        "type": "application",
-        "i18n": "i18n/i18n.properties",
-        "applicationVersion": {
-            "version": "0.0.1"
+  "_version": "1.53.0",
+  "sap.app": {
+    "id": "project1",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.3",
+      "toolsId": "db759823-3031-4bb7-958c-1d7a272e54da"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/SAP/YBACS_G_SRV_01/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "YBACS_G_ANNO_MDL_01"
+          ],
+          "localUri": "localService/mainService/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "YBACS_G_ANNO_MDL_01": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='YBACS_G_ANNO_MDL_01',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/mainService/YBACS_G_ANNO_MDL_01.xml"
+        }
+      },
+      "annotation0": {
+        "type": "ODataAnnotation",
+        "uri": "annotations/annotation0.xml",
+        "settings": {
+          "localUri": "annotations/annotation0.xml"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "etatbacs": {
+          "semanticObject": "project1",
+          "action": "etatbacs",
+          "title": "État des Bacs",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
         },
-        "title": "{{Gestions des bacs}}",
-        "description": "{{appDescription}}",
-        "resources": "resources.json",
-        "sourceTemplate": {
-            "id": "@sap/generator-fiori:basic",
-            "version": "1.17.3",
-            "toolsId": "db759823-3031-4bb7-958c-1d7a272e54da"
+        "receptions": {
+          "semanticObject": "project1",
+          "action": "receptions",
+          "title": "Réceptions",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
         },
-        "dataSources": {
-            "mainService": {
-                "uri": "/sap/opu/odata/SAP/YBACS_G_SRV_01/",
-                "type": "OData",
-                "settings": {
-                    "annotations": [],
-                    "localUri": "localService/mainService/metadata.xml",
-                    "odataVersion": "2.0"
-                }
-            },
-            "YBACS_G_ANNO_MDL_01": {
-                "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='YBACS_G_ANNO_MDL_01',Version='0001')/$value/",
-                "type": "ODataAnnotation",
-                "settings": {
-                    "localUri": "localService/mainService/YBACS_G_ANNO_MDL_01.xml"
-                }
-            }
+        "sorties": {
+          "semanticObject": "project1",
+          "action": "sorties",
+          "title": "Sorties",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
         },
-        "crossNavigation": {
-  "inbounds": {
-    "etatbacs": {
-      "semanticObject": "project1",
-      "action": "etatbacs",
-      "title": "État des Bacs",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
+        "transferts": {
+          "semanticObject": "project1",
+          "action": "transferts",
+          "title": "Transferts",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+        },
+        "jaugeage": {
+          "semanticObject": "project1",
+          "action": "jaugeage",
+          "title": "Jaugeage",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+        },
+        "rapportbac": {
+          "semanticObject": "project1",
+          "action": "rapportbac",
+          "title": "Rapport Bac",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+          
+        },
+        "RapportBacFilter": {
+          "semanticObject": "project1",
+          "action": "RapportBacFilter",
+          "title": "Rapport Bac",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+          
+        },
+        "rapportgl": {
+          "semanticObject": "project1",
+          "action": "rapportgl",
+          "title": "Rapport G/L",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+        },
+        "rapportclients": {
+          "semanticObject": "project1",
+          "action": "rapportclients",
+          "title": "Rapport Clients",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "fullWidth": true
+  },
+  "sap.ui5": {
+    "flexEnabled": false,
+    "dependencies": {
+      "minUI5Version": "1.114.0",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
       }
     },
-    "receptions": {
-      "semanticObject": "project1",
-      "action": "receptions",
-      "title": "Réceptions",
-      "signature": {
-        "parameters": {}
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "project1.i18n.i18n"
+        }
       },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
+      "": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "useBatch": false,
+          "metadataUrlParams": {
+            "sap-language": "EN"
+          }
+        },
+        "type": "sap.ui.model.odata.v2.ODataModel"
       }
     },
-    "sorties": {
-      "semanticObject": "project1",
-      "action": "sorties",
-      "title": "Sorties",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/YBACS_G_SRV_01/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
       }
     },
-    "transferts": {
-      "semanticObject": "project1",
-      "action": "transferts",
-      "title": "Transferts",
-      "signature": {
-        "parameters": {}
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "project1.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
       },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
+      "routes": [
+        {
+          "pattern": "",
+          "name": "etatbacs",
+          "target": "etatbacs"
+        },
+        {
+          "pattern": "etatbacs",
+          "name": "etatbacs",
+          "target": "etatbacs"
+        },
+        {
+          "pattern": "receptions",
+          "name": "receptions",
+          "target": "receptions"
+        },
+        {
+          "pattern": "sorties",
+          "name": "sorties",
+          "target": "sorties"
+        },
+        {
+          "pattern": "transferts",
+          "name": "transferts",
+          "target": "transferts"
+        },
+        {
+          "pattern": "jaugeage",
+          "name": "jaugeage",
+          "target": "jaugeage"
+        },
+        {
+          "pattern": "rapportbac",
+          "name": "rapportbac",
+          "target": "rapportbac"
+        },
+        {
+          "pattern": "rapportbacfilter",
+          "name": "rapportbacfilter",
+          "target": "rapportbacfilter"
+        },
+        {
+          "pattern": "rapportbac/{startDate}/{endDate}",
+          "name": "rapportbac",
+          "target": "rapportbacresults"
+        },
+        {
+          "pattern": "rapportgl",
+          "name": "rapportgl",
+          "target": "rapportgl"
+        },
+        {
+          "pattern": "rapportclients",
+          "name": "rapportclients",
+          "target": "rapportclients"
+        },
+        {
+          "name": "detail",
+          "pattern": "detail/{bacId}",
+          "target": "TargetDetail"
+        },
+        {
+          "name": "ReceptionCreate",
+          "pattern": "receptionCreate",
+          "target": "ReceptionCreate"
+        },
+        {
+          "name": "SortieCreate",
+          "pattern": "SortieCreate",
+          "target": "SortieCreate"
+        },
+        {
+          "name": "TransfertCreate",
+          "pattern": "TransfertCreate",
+          "target": "TransfertCreate"
+        },
+        {
+          "name": "JaugeageCreate",
+          "pattern": "JaugeageCreate",
+          "target": "JaugeageCreate"
+        }
+      ],
+      "targets": {
+        "etatbacs": {
+          "viewName": "EtatBacs",
+          "viewType": "XML",
+          "viewId": "etatbacs",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "receptions": {
+          "viewName": "Receptions",
+          "viewType": "XML",
+          "viewId": "receptions",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "sorties": {
+          "viewName": "Sorties",
+          "viewType": "XML",
+          "viewId": "sorties",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "transferts": {
+          "viewName": "Transferts",
+          "viewType": "XML",
+          "viewId": "transferts",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "jaugeage": {
+          "viewName": "Jaugeage",
+          "viewType": "XML",
+          "viewId": "jaugeage",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "rapportbac": {
+          "viewName": "RapportBac",
+          "viewType": "XML",
+          "viewId": "rapportbac",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "rapportbacfilter": {
+          "viewName": "RapportBacFilter",
+          "viewLevel": 1
+        },
+        "rapportbacresults": {
+          "viewName": "RapportBacResults",
+          "viewLevel": 2
+        },
+        "rapportgl": {
+          "viewName": "RapportGL",
+          "viewType": "XML",
+          "viewId": "rapportgl",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "rapportclients": {
+          "viewName": "RapportClients",
+          "viewType": "XML",
+          "viewId": "rapportclients",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "TargetDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Detail",
+          "viewName": "Detail",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "ReceptionCreate": {
+          "viewName": "ReceptionCreate",
+          "viewId": "ReceptionCreateView",
+          "viewLevel": 2,
+          "viewType": "XML",
+          "transition": "slide"
+        },
+        "SortieCreate": {
+          "viewName": "SortieCreate",
+          "viewId": "SortieCreateView",
+          "viewLevel": 2,
+          "viewType": "XML",
+          "transition": "slide"
+        },
+        "JaugeageCreate": {
+          "viewName": "JaugeageCreate",
+          "viewType": "XML",
+          "viewId": "JaugeageCreateView",
+          "viewLevel": 2,
+          "transition": "slide"
+        },
+        "TransfertCreate": {
+          "viewName": "TransfertCreate",
+          "viewType": "XML",
+          "viewId": "TransfertCreateView",
+          "viewLevel": 2,
+          "transition": "slide"
+        }
       }
     },
-    "jaugeage": {
-      "semanticObject": "project1",
-      "action": "jaugeage",
-      "title": "Jaugeage",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
-      }
-    },
-    "rapportbac": {
-      "semanticObject": "project1",
-      "action": "rapportbac",
-      "title": "Rapport Bac",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
-      }
-    },
-    "rapportgl": {
-      "semanticObject": "project1",
-      "action": "rapportgl",
-      "title": "Rapport G/L",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
-      }
-    },
-    "rapportclients": {
-      "semanticObject": "project1",
-      "action": "rapportclients",
-      "title": "Rapport Clients",
-      "signature": {
-        "parameters": {}
-      },
-      "resolutionResult": {
-        "applicationType": "SAPUI5",
-        "additionalInformation": "SAPUI5.Component=project1",
-        "url": "/sap/bc/ui5_ui5/sap/project1"
-      }
+    "rootView": {
+      "viewName": "project1.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
     }
   }
-}
-
-    },
-    "sap.ui": {
-        "technology": "UI5",
-        "icons": {
-            "icon": "",
-            "favIcon": "",
-            "phone": "",
-            "phone@2": "",
-            "tablet": "",
-            "tablet@2": ""
-        },
-        "deviceTypes": {
-            "desktop": true,
-            "tablet": true,
-            "phone": true
-        },
-        "fullWidth": true
-    },
-    "sap.ui5": {
-        "flexEnabled": false,
-        "dependencies": {
-            "minUI5Version": "1.114.0",
-            "libs": {
-                "sap.m": {},
-                "sap.ui.core": {}
-            }
-        },
-        "contentDensities": {
-            "compact": true,
-            "cozy": true
-        },
-        "models": {
-            "i18n": {
-                "type": "sap.ui.model.resource.ResourceModel",
-                "settings": {
-                    "bundleName": "project1.i18n.i18n"
-                }
-            },
-            "": {
-                "dataSource": "mainService",
-                "preload": true,
-                "settings": {
-                    "defaultBindingMode": "TwoWay",
-                    "defaultCountMode": "Inline",
-                    "useBatch": false,
-                    "metadataUrlParams": {
-                        "sap-language": "EN"
-                    }
-                },
-                "type": "sap.ui.model.odata.v2.ODataModel"
-            }
-        },
-        "dataSources": {
-            "mainService": {
-                "uri": "/sap/opu/odata/sap/YBACS_G_SRV_01/",
-                "type": "OData",
-                "settings": {
-                    "odataVersion": "2.0"
-                }
-            }
-        },
-        "resources": {
-            "css": [
-                {
-                    "uri": "css/style.css"
-                }
-            ]
-        },
-        "routing": {
-            "config": {
-                "routerClass": "sap.m.routing.Router",
-                "viewType": "XML",
-                "async": true,
-                "viewPath": "project1.view",
-                "controlAggregation": "pages",
-                "controlId": "app",
-                "clearControlAggregation": false
-            },
-            "routes": [
-                {
-                    "pattern": "etatbacs",
-                    "name": "etatbacs",
-                    "target": "etatbacs"
-                },
-                {
-                    "pattern": "receptions",
-                    "name": "receptions",
-                    "target": "receptions"
-                },
-                {
-                    "pattern": "sorties",
-                    "name": "sorties",
-                    "target": "sorties"
-                },
-                {
-                    "pattern": "transferts",
-                    "name": "transferts",
-                    "target": "transferts"
-                },
-                {
-                    "pattern": "jaugeage",
-                    "name": "jaugeage",
-                    "target": "jaugeage"
-                },
-                {
-                    "pattern": "rapportbac",
-                    "name": "rapportbac",
-                    "target": "rapportbac"
-                },
-                {
-                    "pattern": "rapportgl",
-                    "name": "rapportgl",
-                    "target": "rapportgl"
-                },
-                {
-                    "pattern": "rapportclients",
-                    "name": "rapportclients",
-                    "target": "rapportclients"
-                },
-                {
-                    "name": "detail",
-                    "pattern": "detail/{bacId}",
-                    "target": "TargetDetail"
-                },
-                {
-                    "name": "ReceptionCreate",
-                    "pattern": "receptionCreate",
-                    "target": "ReceptionCreate"
-                }
-            ],
-            "targets": {
-                "etatbacs": {
-                    "viewName": "EtatBacs",
-                    "viewType": "XML",
-                    "viewId": "etatbacs",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "receptions": {
-                    "viewName": "Receptions",
-                    "viewType": "XML",
-                    "viewId": "receptions",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "sorties": {
-                    "viewName": "Sorties",
-                    "viewType": "XML",
-                    "viewId": "sorties",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "transferts": {
-                    "viewName": "Transferts",
-                    "viewType": "XML",
-                    "viewId": "transferts",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "jaugeage": {
-                    "viewName": "Jaugeage",
-                    "viewType": "XML",
-                    "viewId": "jaugeage",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "rapportbac": {
-                    "viewName": "RapportBac",
-                    "viewType": "XML",
-                    "viewId": "rapportbac",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "rapportgl": {
-                    "viewName": "RapportGL",
-                    "viewType": "XML",
-                    "viewId": "rapportgl",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "rapportclients": {
-                    "viewName": "RapportClients",
-                    "viewType": "XML",
-                    "viewId": "rapportclients",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "TargetDetail": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "Detail",
-                    "viewName": "Detail",
-                    "controlId": "app",
-                    "controlAggregation": "pages"
-                },
-                "ReceptionCreate": {
-                    "viewName": "ReceptionCreate",
-                    "viewId": "receptionCreateView",
-                    "viewLevel": 2,
-                    "viewType": "XML",
-                    "transition": "slide"
-                }
-            }
-        },
-        "rootView": {
-            "viewName": "project1.view.App",
-            "type": "XML",
-            "async": true,
-            "id": "app"
-        }
-    }
 }

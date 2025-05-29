@@ -80,7 +80,7 @@
                 <Property Name="stockage" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="stockage (L)" sap:quickinfo="stockage actuel dans le bac"/>
                 <Property Name="creux" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="creux (L)" sap:quickinfo="creux restant dans le bac"/>
                 <Property Name="id_stock" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
-                <Property Name="volume_stock" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
+                <Property Name="volume_stock" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="stockage (L)" sap:quickinfo="stockage actuel dans le bac"/>
                 <NavigationProperty Name="tobacs" Relationship="YBACS_G_SRV_01.assoc_2528D364ADCE35BC7D5FA28DB8575D67" FromRole="FromRole_assoc_2528D364ADCE35BC7D5FA28DB8575D67" ToRole="ToRole_assoc_2528D364ADCE35BC7D5FA28DB8575D67"/>
                 <NavigationProperty Name="toclients" Relationship="YBACS_G_SRV_01.assoc_9E7AE166B1E48FA2C98A73C822875785" FromRole="FromRole_assoc_9E7AE166B1E48FA2C98A73C822875785" ToRole="ToRole_assoc_9E7AE166B1E48FA2C98A73C822875785"/>
                 <NavigationProperty Name="tojaugeage" Relationship="YBACS_G_SRV_01.assoc_257DA67E31E6AFC3526209B59AE72271" FromRole="FromRole_assoc_257DA67E31E6AFC3526209B59AE72271" ToRole="ToRole_assoc_257DA67E31E6AFC3526209B59AE72271"/>
@@ -109,44 +109,50 @@
                 <Property Name="date_reception" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="date reception" sap:quickinfo="date de reception"/>
                 <Property Name="heure_reception" Type="Edm.Time" Precision="0" sap:label="heure de reception"/>
                 <Property Name="fournisseurs" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer" sap:value-list="standard"/>
-                <Property Name="produit" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="bon_livraison" Type="Edm.String" MaxLength="40" sap:label="Bon livraison" sap:quickinfo="bon de livraison"/>
                 <Property Name="navire" Type="Edm.String" MaxLength="40" sap:label="Nom du Navire" sap:quickinfo="nom du navire de livraison"/>
-                <Property Name="bac_de_reception" Type="Edm.Int32" sap:text="tobac/nom_bac" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer" sap:value-list="standard"/>
+                <Property Name="bac_de_reception" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="volume_expedie_std" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="volume expedié STD" sap:quickinfo="Volume expedié standard"/>
                 <Property Name="volume_recu_std" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="volume recu STD" sap:quickinfo="volume recu standard"/>
                 <Property Name="volume_recu_app" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="volume recu APP" sap:quickinfo="volume recu apparent à temp ambiant"/>
                 <Property Name="temp_bac" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Temperature du bac" sap:quickinfo="temperature du bac"/>
                 <Property Name="densite" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="densité STD" sap:quickinfo="densité standard du produit"/>
                 <Property Name="coeff_astm" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Coefficiant ASTM" sap:quickinfo="coefficient ASTM"/>
+                <Property Name="produit" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="commentaire" Type="Edm.String" MaxLength="132" sap:label="commentaire" sap:quickinfo="commentaire ajouté"/>
-                <Property Name="ClientNom" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Text" sap:heading="" sap:quickinfo="Text Field" sap:value-list="standard"/>
-                <Property Name="BacNom" Type="Edm.String" MaxLength="40" sap:label="nom bac" sap:heading="" sap:quickinfo="nom des bacs" sap:value-list="standard"/>
+                <Property Name="ClientNom" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Text" sap:heading="" sap:quickinfo="Text Field"/>
+                <Property Name="BacNom" Type="Edm.String" MaxLength="40" sap:label="nom bac" sap:heading="" sap:quickinfo="nom des bacs"/>
+                <Property Name="ProduitNom" Type="Edm.String" MaxLength="40" sap:label="nom produit" sap:quickinfo="nom du produit"/>
+                <Property Name="ProduitID" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <NavigationProperty Name="tobac" Relationship="YBACS_G_SRV_01.assoc_E2D84402FF4FA8C0156739BFFF7B1B37" FromRole="FromRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37" ToRole="ToRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37"/>
                 <NavigationProperty Name="toclient" Relationship="YBACS_G_SRV_01.assoc_66977BAE78F4C369E1E30A671BA817BE" FromRole="FromRole_assoc_66977BAE78F4C369E1E30A671BA817BE" ToRole="ToRole_assoc_66977BAE78F4C369E1E30A671BA817BE"/>
+                <NavigationProperty Name="toproduct" Relationship="YBACS_G_SRV_01.assoc_4464968A7782408747C4E848F2A808AB" FromRole="FromRole_assoc_4464968A7782408747C4E848F2A808AB" ToRole="ToRole_assoc_4464968A7782408747C4E848F2A808AB"/>
             </EntityType>
             <EntityType Name="YSORTIES_CDSType" sap:content-version="1">
                 <Key>
                     <PropertyRef Name="id_sortie"/>
                 </Key>
                 <Property Name="id_sortie" Type="Edm.Int32" Nullable="false" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
-                <Property Name="date_sortie" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Date" sap:quickinfo="Date in CHAR Format"/>
-                <Property Name="heure_sortie" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Time" sap:quickinfo="Time in CHAR Format"/>
+                <Property Name="date_sortie" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="date de sortie" sap:quickinfo="date de sortie des bacs vers camions"/>
+                <Property Name="heure_sortie" Type="Edm.Time" Precision="0" sap:label="heure de sortie" sap:quickinfo="heure de sortie des bacs vers camions"/>
                 <Property Name="marketer" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
-                <Property Name="num_voyage" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Text" sap:quickinfo="Text field, length 35"/>
-                <Property Name="bon_de_charge" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Text" sap:quickinfo="Text field, length 35"/>
-                <Property Name="bon_de_livraison" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Text" sap:quickinfo="Text field, length 35"/>
-                <Property Name="num_vehicule" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Text" sap:quickinfo="Text field, length 35"/>
-                <Property Name="num_citerne" Type="Edm.String" MaxLength="35" sap:display-format="UpperCase" sap:label="Text" sap:quickinfo="Text field, length 35"/>
+                <Property Name="num_voyage" Type="Edm.String" MaxLength="40" sap:label="Numero de voyage" sap:quickinfo="numero du voyage de sortie"/>
+                <Property Name="bon_de_charge" Type="Edm.String" MaxLength="40" sap:label="Bon de charge" sap:quickinfo="bon de charge de la sortie"/>
+                <Property Name="bon_de_livraison" Type="Edm.String" MaxLength="40" sap:label="Bon de livraison" sap:quickinfo="bon de livraison de la sortie"/>
+                <Property Name="num_vehicule" Type="Edm.String" MaxLength="40" sap:label="Numero du vehicule" sap:quickinfo="numero du vehicule sortant"/>
+                <Property Name="num_citerne" Type="Edm.String" MaxLength="40" sap:label="Numero de la Citerne" sap:quickinfo="numero de la citerne sortante"/>
                 <Property Name="produits" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="bac_source" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
-                <Property Name="volume_app" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="temp_app" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="volume_15c" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="volume_15c_add" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="num_dum" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="coeff_astm" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="commentaire" Type="Edm.String" MaxLength="132" sap:label="Text" sap:quickinfo="Text of length 132"/>
+                <Property Name="volume_app" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Volume Apparent" sap:quickinfo="volume sortant apparent"/>
+                <Property Name="temp_app" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Temperature Apparent" sap:quickinfo="temperature apparente lors de la sortie"/>
+                <Property Name="volume_15c" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Volume standard" sap:quickinfo="volume a temperature standard (15°C)"/>
+                <Property Name="volume_15c_add" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="volume Additif STD" sap:quickinfo="volume de l'additif ajouté à 15°C"/>
+                <Property Name="num_dum" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Numero DUM"/>
+                <Property Name="coeff_astm" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="Coefficiant ASTM" sap:quickinfo="coefficient ASTM"/>
+                <Property Name="commentaire" Type="Edm.String" MaxLength="132" sap:label="commentaire" sap:quickinfo="commentaire ajouté"/>
+                <Property Name="ClientNom" Type="Edm.String" MaxLength="40" sap:display-format="UpperCase" sap:label="Text" sap:heading="" sap:quickinfo="Text Field"/>
+                <Property Name="BacNom" Type="Edm.String" MaxLength="40" sap:label="nom bac" sap:heading="" sap:quickinfo="nom des bacs"/>
+                <Property Name="ProduitNom" Type="Edm.String" MaxLength="40" sap:label="nom produit" sap:quickinfo="nom du produit"/>
                 <NavigationProperty Name="tobac" Relationship="YBACS_G_SRV_01.assoc_EAD8A329081EA71358C1CD0A054DF30B" FromRole="FromRole_assoc_EAD8A329081EA71358C1CD0A054DF30B" ToRole="ToRole_assoc_EAD8A329081EA71358C1CD0A054DF30B"/>
                 <NavigationProperty Name="toclient" Relationship="YBACS_G_SRV_01.assoc_051A0659567D703BEB82CBD0A80EBEB5" FromRole="FromRole_assoc_051A0659567D703BEB82CBD0A80EBEB5" ToRole="ToRole_assoc_051A0659567D703BEB82CBD0A80EBEB5"/>
             </EntityType>
@@ -157,8 +163,8 @@
                 <Property Name="id_stock" Type="Edm.Int32" Nullable="false" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="bac_concerne" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
                 <Property Name="proprietaire" Type="Edm.Int32" sap:label="INT4" sap:quickinfo="4 Byte Signed Integer"/>
-                <Property Name="volume_stock" Type="Edm.Decimal" Precision="16" Scale="8" sap:label="Decimal no. 16 digit" sap:quickinfo="Decimal no. 16 digits before, 3 after decimal pt, +/-sign"/>
-                <Property Name="commentaire" Type="Edm.String" MaxLength="132" sap:label="Text" sap:quickinfo="Text of length 132"/>
+                <Property Name="volume_stock" Type="Edm.Decimal" Precision="16" Scale="6" sap:label="stockage (L)" sap:quickinfo="stockage actuel dans le bac"/>
+                <Property Name="commentaire" Type="Edm.String" MaxLength="132" sap:label="commentaire" sap:quickinfo="commentaire ajouté"/>
                 <NavigationProperty Name="tobac" Relationship="YBACS_G_SRV_01.assoc_CFC45B21E7365CCEB31CB30D21477B3C" FromRole="FromRole_assoc_CFC45B21E7365CCEB31CB30D21477B3C" ToRole="ToRole_assoc_CFC45B21E7365CCEB31CB30D21477B3C"/>
                 <NavigationProperty Name="toclient" Relationship="YBACS_G_SRV_01.assoc_A8DAF7C6AB03180293D1B01B60298798" FromRole="FromRole_assoc_A8DAF7C6AB03180293D1B01B60298798" ToRole="ToRole_assoc_A8DAF7C6AB03180293D1B01B60298798"/>
             </EntityType>
@@ -193,11 +199,11 @@
             </Association>
             <Association Name="assoc_2528D364ADCE35BC7D5FA28DB8575D67" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YMASTER_CDSType" Multiplicity="1" Role="FromRole_assoc_2528D364ADCE35BC7D5FA28DB8575D67"/>
-                <End Type="YBACS_G_SRV_01.YBACS_CDSType" Multiplicity="*" Role="ToRole_assoc_2528D364ADCE35BC7D5FA28DB8575D67"/>
+                <End Type="YBACS_G_SRV_01.YBACS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_2528D364ADCE35BC7D5FA28DB8575D67"/>
             </Association>
             <Association Name="assoc_9E7AE166B1E48FA2C98A73C822875785" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YMASTER_CDSType" Multiplicity="1" Role="FromRole_assoc_9E7AE166B1E48FA2C98A73C822875785"/>
-                <End Type="YBACS_G_SRV_01.YCLIENTS_CDSType" Multiplicity="*" Role="ToRole_assoc_9E7AE166B1E48FA2C98A73C822875785"/>
+                <End Type="YBACS_G_SRV_01.YCLIENTS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_9E7AE166B1E48FA2C98A73C822875785"/>
             </Association>
             <Association Name="assoc_257DA67E31E6AFC3526209B59AE72271" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YMASTER_CDSType" Multiplicity="1" Role="FromRole_assoc_257DA67E31E6AFC3526209B59AE72271"/>
@@ -205,7 +211,7 @@
             </Association>
             <Association Name="assoc_0575CE7DD96BECE59EB6444CBCEC868B" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YMASTER_CDSType" Multiplicity="1" Role="FromRole_assoc_0575CE7DD96BECE59EB6444CBCEC868B"/>
-                <End Type="YBACS_G_SRV_01.YPRODUCTS_CDSType" Multiplicity="*" Role="ToRole_assoc_0575CE7DD96BECE59EB6444CBCEC868B"/>
+                <End Type="YBACS_G_SRV_01.YPRODUCTS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_0575CE7DD96BECE59EB6444CBCEC868B"/>
             </Association>
             <Association Name="assoc_76E02286DB1874B0A71025095789A7DF" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YMASTER_CDSType" Multiplicity="1" Role="FromRole_assoc_76E02286DB1874B0A71025095789A7DF"/>
@@ -238,18 +244,22 @@
             <Association Name="assoc_E2D84402FF4FA8C0156739BFFF7B1B37" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YRECEPTIONS_CDSType" Multiplicity="1" Role="FromRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37"/>
                 <End Type="YBACS_G_SRV_01.YBACS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37"/>
-                <ReferentialConstraint>
-                    <Principal Role="ToRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37">
-                        <PropertyRef Name="id_bacs"/>
-                    </Principal>
-                    <Dependent Role="FromRole_assoc_E2D84402FF4FA8C0156739BFFF7B1B37">
-                        <PropertyRef Name="bac_de_reception"/>
-                    </Dependent>
-                </ReferentialConstraint>
             </Association>
             <Association Name="assoc_66977BAE78F4C369E1E30A671BA817BE" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YRECEPTIONS_CDSType" Multiplicity="1" Role="FromRole_assoc_66977BAE78F4C369E1E30A671BA817BE"/>
                 <End Type="YBACS_G_SRV_01.YCLIENTS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_66977BAE78F4C369E1E30A671BA817BE"/>
+                <ReferentialConstraint>
+                    <Principal Role="ToRole_assoc_66977BAE78F4C369E1E30A671BA817BE">
+                        <PropertyRef Name="id_client"/>
+                    </Principal>
+                    <Dependent Role="FromRole_assoc_66977BAE78F4C369E1E30A671BA817BE">
+                        <PropertyRef Name="fournisseurs"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="assoc_4464968A7782408747C4E848F2A808AB" sap:content-version="1">
+                <End Type="YBACS_G_SRV_01.YRECEPTIONS_CDSType" Multiplicity="1" Role="FromRole_assoc_4464968A7782408747C4E848F2A808AB"/>
+                <End Type="YBACS_G_SRV_01.YPRODUCTS_CDSType" Multiplicity="0..1" Role="ToRole_assoc_4464968A7782408747C4E848F2A808AB"/>
             </Association>
             <Association Name="assoc_395EFD8AE6A302E0B0703989EE2EFC9C" sap:content-version="1">
                 <End Type="YBACS_G_SRV_01.YBACS_CDSType" Multiplicity="1" Role="FromRole_assoc_395EFD8AE6A302E0B0703989EE2EFC9C"/>
@@ -280,6 +290,10 @@
                 <AssociationSet Name="assoc_395EFD8AE6A302E0B0703989EE2EFC9C" Association="YBACS_G_SRV_01.assoc_395EFD8AE6A302E0B0703989EE2EFC9C" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="YBACS_CDS" Role="FromRole_assoc_395EFD8AE6A302E0B0703989EE2EFC9C"/>
                     <End EntitySet="YPRODUCTS_CDS" Role="ToRole_assoc_395EFD8AE6A302E0B0703989EE2EFC9C"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_4464968A7782408747C4E848F2A808AB" Association="YBACS_G_SRV_01.assoc_4464968A7782408747C4E848F2A808AB" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="YRECEPTIONS_CDS" Role="FromRole_assoc_4464968A7782408747C4E848F2A808AB"/>
+                    <End EntitySet="YPRODUCTS_CDS" Role="ToRole_assoc_4464968A7782408747C4E848F2A808AB"/>
                 </AssociationSet>
                 <AssociationSet Name="assoc_EF910F6CE79B20BB2142A02999F27E94" Association="YBACS_G_SRV_01.assoc_EF910F6CE79B20BB2142A02999F27E94" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
                     <End EntitySet="YMASTER_CDS" Role="FromRole_assoc_EF910F6CE79B20BB2142A02999F27E94"/>
@@ -362,66 +376,8 @@
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="email_client"/>
                                 </Record>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="fournisseurs"/>
-                                    <PropertyValue Property="ValueListProperty" String="id_client"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="nom_client"/>
-                                </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="commentaire"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="YBACS_G_SRV_01.YRECEPTIONS_CDSType/bac_de_reception" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="cds for bacs"/>
-                        <PropertyValue Property="CollectionPath" String="YBACS_CDS"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="bac_de_reception"/>
-                                    <PropertyValue Property="ValueListProperty" String="id_bacs"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="nom_bac"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="product"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="capacity"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="stockage"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="creux"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="nom_produit"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="YBACS_G_SRV_01.YRECEPTIONS_CDSType/ClientNom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="CDS for YCLIENTS"/>
-                        <PropertyValue Property="CollectionPath" String="YCLIENTS_CDS"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="email_client"/>
                                 </Record>
                                 <Record Type="Common.ValueListParameterInOut">
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="fournisseurs"/>
@@ -429,44 +385,6 @@
                                 </Record>
                                 <Record Type="Common.ValueListParameterDisplayOnly">
                                     <PropertyValue Property="ValueListProperty" String="nom_client"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="commentaire"/>
-                                </Record>
-                            </Collection>
-                        </PropertyValue>
-                    </Record>
-                </Annotation>
-            </Annotations>
-            <Annotations Target="YBACS_G_SRV_01.YRECEPTIONS_CDSType/BacNom" xmlns="http://docs.oasis-open.org/odata/ns/edm">
-                <Annotation Term="Common.ValueList">
-                    <Record>
-                        <PropertyValue Property="Label" String="cds for bacs"/>
-                        <PropertyValue Property="CollectionPath" String="YBACS_CDS"/>
-                        <PropertyValue Property="SearchSupported" Bool="true"/>
-                        <PropertyValue Property="Parameters">
-                            <Collection>
-                                <Record Type="Common.ValueListParameterInOut">
-                                    <PropertyValue Property="LocalDataProperty" PropertyPath="bac_de_reception"/>
-                                    <PropertyValue Property="ValueListProperty" String="id_bacs"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="nom_bac"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="product"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="capacity"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="stockage"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="creux"/>
-                                </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="nom_produit"/>
                                 </Record>
                             </Collection>
                         </PropertyValue>
@@ -609,6 +527,14 @@
                                 </Record>
                                 <Record>
                                     <PropertyValue Property="NavigationProperty" NavigationPropertyPath="toclient"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="true"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="toproduct"/>
                                     <PropertyValue Property="InsertRestrictions">
                                         <Record>
                                             <PropertyValue Property="Insertable" Bool="true"/>

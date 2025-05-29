@@ -1,0 +1,95 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns:formatter="project1.controller.utilities.formatter">
+
+    <Dialog id="receptionDetailsDialog" title="Détails Réception" contentWidth="900px" contentHeight="auto" draggable="true" resizable="true" class="sapUiResponsivePadding">
+        <layout:VerticalLayout>
+            
+            <!-- Two-column layout using HBox -->
+            <HBox justifyContent="SpaceBetween" renderType="Div">
+                
+                <!-- Column 1: Group 1 only -->
+                <VBox width="48%">
+                    <smartForm:SmartForm
+                        editable="false"
+                        entityType="YRECEPTIONS_CDSType">
+                        
+                        <smartForm:Group title="Informations Réception">
+                            <smartForm:GroupElement label="Date Réception">
+                                <smartField:SmartField value="{path: 'date_reception'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Heure Réception">
+                                <smartField:SmartField value="{path: 'heure_reception'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Expédié (STD)">
+                                <Text text="{path: 'volume_expedie_std', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Reçu (STD)">
+                                <Text text="{path: 'volume_recu_std', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Volume Reçu (App)">
+                                <Text text="{path: 'volume_recu_app', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Température Bac">
+                                <Text text="{path: 'temp_bac', formatter: '.formatter.formatNumber'} °C" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Densité">
+                                <Text text="{path: 'densite', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Coefficient ASTM">
+                                <Text text="{path: 'coeff_astm', formatter: '.formatter.formatNumber'}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+                <!-- Column 2: Other groups -->
+                <VBox width="48%">
+                    <smartForm:SmartForm
+                        editable="false"
+                        entityType="YRECEPTIONS_CDSType">
+
+                        <smartForm:Group title="Bac et Produit">
+                            <smartForm:GroupElement label="Nom Bac">
+                                <smartField:SmartField value="{BacNom}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Nom Produit">
+                                <smartField:SmartField value="{ProduitNom}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Client">
+                            <smartForm:GroupElement label="Nom Client">
+                                <smartField:SmartField value="{ClientNom}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Bon de Livraison">
+                                <smartField:SmartField value="{bon_livraison}" />
+                            </smartForm:GroupElement>
+                            <smartForm:GroupElement label="Navire">
+                                <smartField:SmartField value="{navire}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                        <smartForm:Group title="Autres">
+                            <smartForm:GroupElement label="Commentaire">
+                                <smartField:SmartField value="{commentaire}" />
+                            </smartForm:GroupElement>
+                        </smartForm:Group>
+
+                    </smartForm:SmartForm>
+                </VBox>
+
+            </HBox>
+
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Fermer" press=".onCloseDialog" />
+            </Toolbar>
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

@@ -4,12 +4,12 @@
           xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
           xmlns:smartTable="sap.ui.comp.smarttable"
           xmlns:uxap="sap.uxap"
-          controllerName="project1.controller.Receptions"
+          controllerName="project1.controller.Jaugeage"
           displayBlock="true"
           height="100%">
 
     <uxap:ObjectPageLayout
-        id="objectPageLayout"
+        id="objectPageLayoutJ"
         showTitleInHeaderContent="true"
         alwaysShowContentHeader="false"
         preserveHeaderStateOnScroll="false"
@@ -37,8 +37,8 @@
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartFilterBar:SmartFilterBar
-                            id="receptionsSmartFilter"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="jaugeageSmartFilter"
+                            entitySet="YJAUGEAGE_CDS"
                             useToolbar="true"
                             useSnapshot="true"
                             showGoOnFB="true"
@@ -61,40 +61,40 @@
                     <uxap:blocks>
                         <smartTable:SmartTable
                         
-                            id="receptionsSmartTable"
-                            entitySet="YRECEPTIONS_CDS"
+                            id="jaugeageSmartTable"
+                            entitySet="YJAUGEAGE_CDS"
                             tableType="ResponsiveTable"
                             enableExport="true"
                             useVariantManagement="false"
                             header="Liste des réceptions"
-                            smartFilterId="receptionsSmartFilter"
-                            persistencyKey="ReceptionsSmartTablePersistencyKey"
+                            smartFilterId="jaugeageSmartFilter"
+                            persistencyKey="JaugeageSmartTablePersistencyKey"
                             enableAutoBinding="true"
                             showRowCount="true"
                             class="sapUiResponsiveContentPadding"
                             showFullScreenButton="true"
                             demandPopin="true"
                             useTablePersonalisation="false"
-                            initiallyVisibleFields="date_reception,BacNom,ProduitNom,ClientNom,volume_recu_app,temp_bac"
-                            requestAtLeastFields="date_reception,heure_reception,volume_expedie_std,volume_recu_std,volume_recu_app,temp_bac,densite,coeff_astm,BacNom,ProduitNom,ClientNom,bon_livraison,navire,commentaire"
+                            initiallyVisibleFields="date_jaugeage,BacNom,ProduitNom,sp_ambiant,sp_standard"
+                            requestAtLeastFields="id_jaugeage,date_jaugeage,bac_concerne,sp_ambiant,sp_standard,BacNom,ProduitNom"
                             ignoredFields="">
                             <smartTable:customToolbar>
                                 <Toolbar>
                                     <ToolbarSpacer />
                                     <Button
-                                        text="Modifier la dernière réception"
+                                        text="Modifier le dernier Jaugeage"
                                         icon="sap-icon://edit"
-                                        press=".onEditLastReception" />
+                                        press=".onEditLastJaugeage" />
                                     <Button
-                                        text="Créer Réception"
+                                        text="Créer Jaugeage"
                                         icon="sap-icon://add"
-                                        press=".onCreateReceptionPress" />
+                                        press=".onCreateJaugeagePress" />
                                     
                                 </Toolbar>
                             </smartTable:customToolbar>
                             <!-- Your custom inner Table -->
                             <Table
-                                id="innerReceptionsTable"
+                                id="innerJaugeageTable"
                                 mode="SingleSelectMaster"
                                 growing="true"
                                 growingThreshold="20"
@@ -103,14 +103,15 @@
                                 >
 
                                 <items>
-                                    <ColumnListItem type="Navigation" press=".onRowPress">
+                                    <ColumnListItem type="Active" > 
+                                    <!--  type="Navigation" press=".onRowPress"  add if needed later -->
+                                    
                                         <cells>
-                                            <Text text="{ path:'date_reception' , formatter : '.formatter.formatDate'}" />
+                                            <Text text="{ path:'date_jaugeage' , formatter : '.formatter.formatDate'}" />
                                             <Text text="{BacNom}" />
                                             <Text text="{ProduitNom}" />
-                                            <Text text="{ClientNom}" />
-                                            <Text text="{ path: 'volume_recu_app', formatter: '.formatter.formatNumber' }" />
-                                            <Text text="{ path: 'temp_bac', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'sp_ambiant', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'sp_standard', formatter: '.formatter.formatNumber' }" />
                                         </cells>
                                     </ColumnListItem>
                                 </items>

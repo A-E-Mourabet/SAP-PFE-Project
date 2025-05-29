@@ -1,0 +1,71 @@
+<core:FragmentDefinition 
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:smartField="sap.ui.comp.smartfield"
+    xmlns:layout="sap.ui.layout"
+    xmlns:formatter="project1.controller.utilities.formatter">
+
+    <Dialog id="TransfertDetails" title="Détails Transfert" contentWidth="900px" contentHeight="auto" draggable="true" resizable="true" class="sapUiResponsivePadding">
+        <layout:VerticalLayout>
+            
+            <!-- Two-column layout -->
+                    <HBox justifyContent="SpaceBetween" renderType="Div" >
+
+                        <!-- Colonne Gauche : Informations générales -->
+                        <VBox width="48%" >
+                            <smartForm:SmartForm id="TransfertSmartFormLeft2" editable="false" entityType="YTRANSFERT_BACS_CDS">
+                             <!-- Bac Source -->
+                                <smartForm:Group title="Bac Source">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{BacSource}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{ProduitSource}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label = "volume expédié">
+                                        <Text text="{path: 'volume_expedie', formatter: '.formatter.formatNumber'}"  />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+
+                                <!-- Bac Destination -->
+                                <smartForm:Group title="Bac Destination">
+                                <smartForm:GroupElement>
+                                        <smartField:SmartField value="{BacDestination}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{ProduitDestination}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement label = "volume reçu">
+                                        <Text text="{path: 'volume_recu', formatter: '.formatter.formatNumber'}"  />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                                
+                            </smartForm:SmartForm>
+                        </VBox>
+
+                        <!-- Colonne Droite : Bac Source + Bac Destination (superposés) -->
+                        <VBox width="48%">
+                            <smartForm:SmartForm id="TransfertSmartFormRight2" editable="false" entityType="YTRANSFERT_BACS_CDS">
+                                <smartForm:Group title="Informations Générales">
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{date_transfert}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{heure_transfert}" />
+                                    </smartForm:GroupElement>
+                                    <smartForm:GroupElement>
+                                        <smartField:SmartField value="{commentaire}" />
+                                    </smartForm:GroupElement>
+                                </smartForm:Group>
+                               
+                            </smartForm:SmartForm>
+                        </VBox>
+                    </HBox>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="Fermer" press=".onCloseDialog" />
+            </Toolbar>
+        </layout:VerticalLayout>
+    </Dialog>
+</core:FragmentDefinition>

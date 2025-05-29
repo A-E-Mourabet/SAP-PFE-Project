@@ -1,0 +1,40 @@
+<mvc:View
+  controllerName="project1.controller.RapportBacResults"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  xmlns:smartFilter="sap.ui.comp.smartfilterbar">
+
+  <Page title="Rapport Bac - Résultats">
+    <content>
+
+      <!-- SmartFilterBar liée à l'entité type retournée par la CDS paramétrée -->
+      <smartFilter:SmartFilterBar
+        id="smartFilterBar"
+        entityType="YBAC_REPORT_CDSType"
+        useDateRangeType="true"
+        persistencyKey="rapportBacFilter"
+        
+        showClearOnFB="true"
+        showRestoreOnFB="true"
+        liveMode="false"
+        enableBasicSearch="false" />
+
+      <!-- SmartTable contrôlée par la SmartFilterBar -->
+      <smartTable:SmartTable
+        id="smartTableRapportBac"
+        smartFilterId="smartFilterBar"
+        entitySet="YBAC_REPORT_CDS"
+        tableType="ResponsiveTable"
+        enableAutoBinding="false"
+        useExportToExcel="true"
+        header="Rapport Bac"
+        showRowCount="true"
+        persistencyKey="rapportBacTable"
+        useVariantManagement="true"
+        useTablePersonalisation="true"
+         />
+      
+    </content>
+  </Page>
+</mvc:View>
