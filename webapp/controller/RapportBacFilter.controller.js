@@ -7,15 +7,18 @@ sap.ui.define([
   return Controller.extend("project1.controller.RapportBacFilter", {
     onAfficherRapport: function () {
       const oView = this.getView();
-      const sStartDate = oView.byId("idDateStart").getValue();
-      const sEndDate = oView.byId("idDateEnd").getValue();
+      const oStartDate = oView.byId("idDateStart").getDateValue();
+      const oEndDate = oView.byId("idDateEnd").getDateValue();
 
-      if (!sStartDate || !sEndDate) {
+      if (!oStartDate || !oEndDate) {
         MessageToast.show("Veuillez saisir les deux dates !");
         return;
       }
 
-      // Navigation vers la vue rapport avec les paramètres dates
+      const sStartDate = oStartDate.toISOString().split("T")[0]; // yyyy-MM-dd
+      const sEndDate = oEndDate.toISOString().split("T")[0];
+
+      // Navigation vers la vue rapport avec paramètres
       this.getOwnerComponent().getRouter().navTo("rapportbac", {
         startDate: sStartDate,
         endDate: sEndDate

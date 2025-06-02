@@ -31,8 +31,11 @@ sap.ui.define([
                     case "jaugeage":
                         oRouter.navTo("jaugeage");
                         break;
-                    case "RapportBacFilter":
+                    case "rapportbacfilter":
                         oRouter.navTo("RapportBacFilter");
+                        break;
+                    case "rapportbac":
+                        oRouter.navTo("RapportBac");
                         break;
                     case "rapportgl":
                         oRouter.navTo("rapportgl");

@@ -10,17 +10,21 @@
       <layout:VerticalLayout
         class="sapUiContentPadding"
         width="100%">
+        
         <Label text="Date début" labelFor="idDateStart"/>
-        <DatePicker id="idDateStart" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy"/>
+        <DatePicker id="idDateStart"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="dd/MM/yyyy" />
         
         <Label text="Date fin" labelFor="idDateEnd" />
-        <DatePicker id="idDateEnd" valueFormat="yyyy-MM-dd" displayFormat="dd/MM/yyyy"/>
+        <DatePicker id="idDateEnd"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="dd/MM/yyyy" />
         
         <Button
           text="Afficher rapport"
           type="Emphasized"
-          press=".onAfficherRapport"
-           />
+          press=".onAfficherRapport" />
       </layout:VerticalLayout>
     </content>
   </Page>

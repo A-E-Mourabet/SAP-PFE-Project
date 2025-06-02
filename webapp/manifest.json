@@ -55,11 +55,11 @@
             "applicationType": "SAPUI5",
             "additionalInformation": "SAPUI5.Component=project1",
             "url": "/sap/bc/ui5_ui5/sap/project1"
-          }
+            }
         },
         "receptions": {
           "semanticObject": "project1",
-          "action": "receptions",
+          "action": "Receptions",
           "title": "Réceptions",
           "signature": {
             "parameters": {}
@@ -68,7 +68,7 @@
             "applicationType": "SAPUI5",
             "additionalInformation": "SAPUI5.Component=project1",
             "url": "/sap/bc/ui5_ui5/sap/project1"
-          }
+            }
         },
         "sorties": {
           "semanticObject": "project1",
@@ -109,7 +109,7 @@
             "url": "/sap/bc/ui5_ui5/sap/project1"
           }
         },
-        "rapportbac": {
+        "RapportBac": {
           "semanticObject": "project1",
           "action": "rapportbac",
           "title": "Rapport Bac",
@@ -276,13 +276,13 @@
         },
         {
           "pattern": "rapportbac",
-          "name": "rapportbac",
+          "name": "RapportBac",
           "target": "rapportbac"
         },
         {
-          "pattern": "rapportbacfilter",
-          "name": "rapportbacfilter",
-          "target": "rapportbacfilter"
+          "pattern": "RapportBacFilter",
+          "name": "RapportBacFilter",
+          "target": "RapportBacFilter"
         },
         {
           "pattern": "rapportbac/{startDate}/{endDate}",
@@ -334,11 +334,12 @@
           "controlAggregation": "pages"
         },
         "receptions": {
-          "viewName": "Receptions",
-          "viewType": "XML",
-          "viewId": "receptions",
-          "controlId": "app",
-          "controlAggregation": "pages"
+        "viewName": "Receptions",
+        "viewId": "receptions",
+        "viewLevel": 1,
+        "viewType": "XML",
+        "controlId": "app",
+        "controlAggregation": "pages"
         },
         "sorties": {
           "viewName": "Sorties",
@@ -362,15 +363,19 @@
           "controlAggregation": "pages"
         },
         "rapportbac": {
-          "viewName": "RapportBac",
+          "viewName": "RapportBacResults",
           "viewType": "XML",
-          "viewId": "rapportbac",
+          "viewLevel": 1,
+          "viewId": "rapportBacPage",
+          "viewType": "XML"
+        },
+        "RapportBacFilter": {
+          "viewName": "RapportBacFilter",
+          "viewLevel": 1,
+          "viewType": "XML",
+          "viewId": "RapportBacFilter",
           "controlId": "app",
           "controlAggregation": "pages"
-        },
-        "rapportbacfilter": {
-          "viewName": "RapportBacFilter",
-          "viewLevel": 1
         },
         "rapportbacresults": {
           "viewName": "RapportBacResults",

@@ -1,40 +1,87 @@
 <mvc:View
-  controllerName="project1.controller.RapportBacResults"
-  xmlns="sap.m"
-  xmlns:mvc="sap.ui.core.mvc"
-  xmlns:smartTable="sap.ui.comp.smarttable"
-  xmlns:smartFilter="sap.ui.comp.smartfilterbar">
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:uxap="sap.uxap"
+    controllerName="project1.controller.RapportBacResults"
+    displayBlock="true"
+    height="100%">
 
-  <Page title="Rapport Bac - Résultats">
-    <content>
 
-      <!-- SmartFilterBar liée à l'entité type retournée par la CDS paramétrée -->
-      <smartFilter:SmartFilterBar
-        id="smartFilterBar"
-        entityType="YBAC_REPORT_CDSType"
-        useDateRangeType="true"
-        persistencyKey="rapportBacFilter"
-        
-        showClearOnFB="true"
-        showRestoreOnFB="true"
-        liveMode="false"
-        enableBasicSearch="false" />
+    <uxap:ObjectPageLayout
+        id="objectPageLayoutRapport"
+        showTitleInHeaderContent="true"
+        alwaysShowContentHeader="false"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        upperCaseAnchorBar="false"
+        useIconTabBar="false">
 
-      <!-- SmartTable contrôlée par la SmartFilterBar -->
-      <smartTable:SmartTable
-        id="smartTableRapportBac"
-        smartFilterId="smartFilterBar"
-        entitySet="YBAC_REPORT_CDS"
-        tableType="ResponsiveTable"
-        enableAutoBinding="false"
-        useExportToExcel="true"
-        header="Rapport Bac"
-        showRowCount="true"
-        persistencyKey="rapportBacTable"
-        useVariantManagement="true"
-        useTablePersonalisation="true"
-         />
-      
-    </content>
-  </Page>
+        <!-- Titre de la page -->
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:expandedHeading>
+                    <Title text="Rapport par Bac" />
+                </uxap:expandedHeading>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <!-- Texte explicatif -->
+        <uxap:headerContent>
+            <Text text="Rapport synthétique par bac sur une période donnée" />
+        </uxap:headerContent>
+
+        <!-- SECTION : Filtre -->
+        <uxap:ObjectPageSection title="filtres des bacs">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                    <smartFilterBar:SmartFilterBar
+                        id="rapportBacSmartFilterBar"
+                        entityType="YBAC_REPORT_CDSType"
+                        useToolbar="true"
+                        showClearOnFB="false"
+                        showFilterConfiguration="true"
+                        header="Filtres rapport par bac"
+                        persistencyKey="rapportBacFilter"
+                        enableBasicSearch="true"
+                        liveMode="true"
+                        searchEnabled="true"
+                        initialized="onFilterBarInitialized" />
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
+
+        <!-- SECTION : Tableau -->
+        <uxap:ObjectPageSection title="Données des bacs">
+            <uxap:subSections>
+                <uxap:ObjectPageSubSection>
+                    <uxap:blocks>
+                        <smartTable:SmartTable
+                            id="smartTableRapportBac"
+                            tableType="ResponsiveTable"
+                            entitySet="YBAC_REPORT_CDSSet"
+                            smartFilterId="rapportBacSmartFilterBar"
+                            useExportToExcel="true"
+                            useVariantManagement="false"
+                            useTablePersonalisation="true"
+                            header="Rapport par bac"
+                            persistencyKey="rapportBacTable"
+                            enableAutoBinding="false"
+                            showRowCount="true"
+                            editable="false"
+                            beforeRebindTable="onBeforeRebindTable"
+                            initiallyVisibleFields="nom_bac,nom_produit,capacite_bac,volume_initial_STD,volume_initial_AMB,volume_final_AMB,volume_expedie_total_STD"
+                            requestAtLeastFields="nom_bac,nom_produit,capacite_bac,volume_expedie_total_STD,volume_recu_total_STD,volume_recu_total_AMB,volume_transfere_S_total_STD,volume_transfere_D_total_STD,volume_sorti_total_AMB,volume_sorti_total_STD,volume_initial_AMB,volume_final_AMB,volume_initial_STD,volume_final_STD,stock_comptable_amb,stock_comptable_std,PG_exploitation_amb,PG_exploitation_std" 
+                            
+                            />
+                    </uxap:blocks>
+                </uxap:ObjectPageSubSection>
+            </uxap:subSections>
+        </uxap:ObjectPageSection>
+
+    </uxap:ObjectPageLayout>
 </mvc:View>

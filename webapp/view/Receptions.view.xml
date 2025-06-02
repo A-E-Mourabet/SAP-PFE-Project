@@ -75,7 +75,7 @@
                             showFullScreenButton="true"
                             demandPopin="true"
                             useTablePersonalisation="false"
-                            initiallyVisibleFields="date_reception,BacNom,ProduitNom,ClientNom,volume_recu_app,temp_bac"
+                            initiallyVisibleFields="date_reception,BacNom,ProduitNom,ClientNom,volume_expedie_std,temp_bac"
                             requestAtLeastFields="date_reception,heure_reception,volume_expedie_std,volume_recu_std,volume_recu_app,temp_bac,densite,coeff_astm,BacNom,ProduitNom,ClientNom,bon_livraison,navire,commentaire"
                             ignoredFields="">
                             <smartTable:customToolbar>
@@ -109,7 +109,7 @@
                                             <Text text="{BacNom}" />
                                             <Text text="{ProduitNom}" />
                                             <Text text="{ClientNom}" />
-                                            <Text text="{ path: 'volume_recu_app', formatter: '.formatter.formatNumber' }" />
+                                            <Text text="{ path: 'volume_expedie_std', formatter: '.formatter.formatNumber' }" />
                                             <Text text="{ path: 'temp_bac', formatter: '.formatter.formatNumber' }" />
                                         </cells>
                                     </ColumnListItem>

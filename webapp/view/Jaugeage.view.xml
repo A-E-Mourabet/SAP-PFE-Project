@@ -21,14 +21,14 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
-                    <Title text="Gestion des Réceptions" />
+                    <Title text="Gestion des Jaugeage" />
                 </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
         <!-- Header Content (Optional) -->
         <uxap:headerContent>
-            <Text text="Filtres disponibles pour les réceptions ci-dessous" />
+            <Text text="Filtres disponibles pour les Jaugeage ci-dessous" />
         </uxap:headerContent>
 
         <!-- FIRST SECTION: SMART FILTER BAR -->
@@ -43,7 +43,7 @@
                             useSnapshot="true"
                             showGoOnFB="true"
                             enableBasicSearch="true"
-                            persistencyKey="ReceptionsSmartFilterPersistencyKey">
+                            persistencyKey="JaugeageSmartFilterPersistencyKey">
                             <smartFilterBar:customData>
                                 <core:CustomData key="defaultFilterBarExpanded" value="{}"/>
                                 <core:CustomData key="defaultShowAllFilters" value="{}"/>
@@ -55,7 +55,7 @@
         </uxap:ObjectPageSection>
 
         <!-- SECOND SECTION: SMART TABLE -->
-        <uxap:ObjectPageSection title="Liste des Réceptions">
+        <uxap:ObjectPageSection title="Liste des Jaugeage">
             <uxap:subSections>
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
@@ -66,7 +66,7 @@
                             tableType="ResponsiveTable"
                             enableExport="true"
                             useVariantManagement="false"
-                            header="Liste des réceptions"
+                            header="Liste des jaugeage"
                             smartFilterId="jaugeageSmartFilter"
                             persistencyKey="JaugeageSmartTablePersistencyKey"
                             enableAutoBinding="true"

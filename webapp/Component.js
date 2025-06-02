@@ -10,46 +10,48 @@ sap.ui.define(["sap/ui/core/UIComponent", "sap/ui/Device", "./model/models"], fu
             // Appel du constructeur parent
             UIComponent.prototype.init.apply(this, arguments);
 
+            this.getRouter().initialize();
+
             // Initialisation du modèle de device
             this.setModel(models.createDeviceModel(), "device");
 
-            // Gestion de la navigation selon l’intent
-            const oStartupParameters = this.getComponentData()?.startupParameters;
-            const action = oStartupParameters?.action?.[0]; // ex: "etatbacs", "receptions", etc.
+            // // Gestion de la navigation selon l’intent
+            // const oStartupParameters = this.getComponentData()?.startupParameters;
+            // const action = oStartupParameters?.action?.[0]; // ex: "etatbacs", "receptions", etc.
 
-            const oRouter = this.getRouter();
+            // const oRouter = this.getRouter();
 
-            if (action) {
-                switch (action) {
-                    case "etatbacs":
-                        oRouter.navTo("etatbacs");
-                        break;
-                    case "receptions":
-                        oRouter.navTo("receptions");
-                        break;
-                    case "sorties":
-                        oRouter.navTo("sorties");
-                        break;
-                    case "transferts":
-                        oRouter.navTo("transferts");
-                        break;
-                    case "jaugeage":
-                        oRouter.navTo("jaugeage");
-                        break;
-                    case "rapportbac":
-                        oRouter.navTo("rapportbac");
-                        break;
-                    case "rapportgl":
-                        oRouter.navTo("rapportgl");
-                        break;
-                    case "rapportclients":
-                        oRouter.navTo("rapportclients");
-                        break;
-                    default:
-                        oRouter.navTo("notFound"); // ou une vue par défaut
-                        break;
-                }
-            }
+            // if (action) {
+            //     switch (action) {
+            //         case "etatbacs":
+            //             oRouter.navTo("etatbacs");
+            //             break;
+            //         case "receptions":
+            //             oRouter.navTo("receptions");
+            //             break;
+            //         case "sorties":
+            //             oRouter.navTo("sorties");
+            //             break;
+            //         case "transferts":
+            //             oRouter.navTo("transferts");
+            //             break;
+            //         case "jaugeage":
+            //             oRouter.navTo("jaugeage");
+            //             break;
+            //         case "rapportbac":
+            //             oRouter.navTo("rapportbac");
+            //             break;
+            //         case "rapportgl":
+            //             oRouter.navTo("rapportgl");
+            //             break;
+            //         case "rapportclients":
+            //             oRouter.navTo("rapportclients");
+            //             break;
+            //         default:
+            //             oRouter.navTo("notFound"); // ou une vue par défaut
+            //             break;
+            //     }
+            // }
         },
 		/**
 		 * This method can be called to determine whether the sapUiSizeCompact or sapUiSizeCozy
