@@ -5,13 +5,13 @@
     xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:uxap="sap.uxap"
-    controllerName="project1.controller.RapportBacResults"
+    controllerName="project1.controller.RapportProduitResults"
     displayBlock="true"
     height="100%">
 
 
     <uxap:ObjectPageLayout
-        id="objectPageLayoutRapport"
+        id="objectPageLayoutRapportP"
         showTitleInHeaderContent="true"
         alwaysShowContentHeader="false"
         preserveHeaderStateOnScroll="false"
@@ -23,60 +23,62 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:expandedHeading>
-                    <Title text="Rapport par Bac" />
+                    <Title text="Rapport par Produit" />
                 </uxap:expandedHeading>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
         <!-- Texte explicatif -->
         <uxap:headerContent>
-            <Text text="Rapport synthétique par bac sur une période donnée" />
+            <Text text="Rapport synthétique par Produit sur une période donnée" />
         </uxap:headerContent>
 
         <!-- SECTION : Filtre -->
-        <uxap:ObjectPageSection title="filtres des bacs">
+        <uxap:ObjectPageSection title="filtres des Produits">
             <uxap:subSections>
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                     <smartFilterBar:SmartFilterBar
-                        id="rapportBacSmartFilterBar"
-                        entityType="YBAC_REPORT_CDSType"
+                        id="rapportProduitSmartFilterBar"
+                        entityType="YPG_PRODUIT_CDSType"
                         useToolbar="true"
                         showClearOnFB="false"
                         showFilterConfiguration="true"
-                        header="Filtres rapport par bac"
-                        persistencyKey="rapportBacFilter"
+                        header="Filtres rapport par Produits"
+                        persistencyKey="rapportProduitFilter"
                         enableBasicSearch="true"
                         liveMode="true"
                         searchEnabled="true"
-                        initialized="onFilterBarInitialized" />
+                        initialized="onFilterBarInitialized"
+                         />
                     </uxap:blocks>
                 </uxap:ObjectPageSubSection>
             </uxap:subSections>
         </uxap:ObjectPageSection>
 
         <!-- SECTION : Tableau -->
-        <uxap:ObjectPageSection title="Données des bacs">
+        <uxap:ObjectPageSection title="Données des Produits">
             <uxap:subSections>
                 <uxap:ObjectPageSubSection>
                     <uxap:blocks>
                         <smartTable:SmartTable
-                            id="smartTableRapportBac"
+                            id="smartTableRapportProduit"
                             tableType="ResponsiveTable"
-                            entitySet="YBAC_REPORT_CDSSet"
-                            smartFilterId="rapportBacSmartFilterBar"
+                            entitySet="YPG_PRODUIT_CDSSet"
+                            smartFilterId="rapportProduitSmartFilterBar"
                             useExportToExcel="true"
                             useVariantManagement="false"
                             useTablePersonalisation="true"
                             header="Rapport par bac"
-                            persistencyKey="rapportBacTable"
+                            persistencyKey="rapportProduitTable"
                             enableAutoBinding="false"
                             showRowCount="true"
                             editable="false"
                             beforeRebindTable="onBeforeRebindTable"
-                            initiallyVisibleFields="nom_bac,volume_initial_STD,volume_final_AMB,volume_final_STD,stock_comptable_std,PG_exploitation_std"
-                            requestAtLeastFields="nom_bac,nom_produit,capacite_bac,volume_expedie_total_STD,volume_recu_total_STD,volume_recu_total_AMB,volume_transfere_S_total_STD,volume_transfere_D_total_STD,volume_sorti_total_AMB,volume_sorti_total_STD,volume_initial_AMB,volume_final_AMB,volume_initial_STD,volume_final_STD,stock_comptable_amb,stock_comptable_std,PG_exploitation_amb,PG_exploitation_std" 
-                            
+                            initiallyVisibleFields="nom_produit,stock_ouverture_total,volume_expedie_total_STD,volume_recu_total_STD,pg_reception_total,volume_sorti_total_STD,PG_exploitation_std"
+                            requestAtLeastFields="nom_produit,stock_ouverture_total,volume_expedie_total_STD,volume_recu_total_STD,volume_recu_total_AMB,volume_sorti_total_STD,volume_sorti_total_AMB,pg_reception_total,pg_temperature_total,stock_cloture_total,stock_comptable_total,pg_exploitation_total
+" 
+                            ignoredFields="id_produit"
                             />
                     </uxap:blocks>
                 </uxap:ObjectPageSubSection>

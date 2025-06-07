@@ -1,0 +1,31 @@
+<mvc:View
+  controllerName="project1.controller.RapportProduitFilter"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns:core="sap.ui.core"
+  xmlns:layout="sap.ui.layout">
+  
+  <Page title="Sélection rapport Produit">
+    <content>
+      <layout:VerticalLayout
+        class="sapUiContentPadding"
+        width="100%">
+        
+        <Label text="Date début" labelFor="idDateStart"/>
+        <DatePicker id="idDateStartP"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="dd/MM/yyyy" />
+        
+        <Label text="Date fin" labelFor="idDateEnd" />
+        <DatePicker id="idDateEndP"
+                    valueFormat="yyyy-MM-dd"
+                    displayFormat="dd/MM/yyyy" />
+        
+        <Button
+          text="Afficher rapport"
+          type="Emphasized"
+          press=".onAfficherRapport" />
+      </layout:VerticalLayout>
+    </content>
+  </Page>
+</mvc:View>

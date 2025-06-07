@@ -37,11 +37,14 @@ sap.ui.define([
                     case "rapportbac":
                         oRouter.navTo("RapportBac");
                         break;
-                    case "rapportgl":
-                        oRouter.navTo("rapportgl");
+                    case "rapportproduitfilter":
+                        oRouter.navTo("RapportProduitFilter");
                         break;
-                    case "rapportclients":
-                        oRouter.navTo("rapportclients");
+                    case "rapportproduitresults":
+                        oRouter.navTo("rapportproduitresults");
+                        break;
+                    case "rapportclientfilter":
+                        oRouter.navTo("RapportClientFilter");
                         break;
                     default:
                         console.warn("Intent non reconnu :", intent);

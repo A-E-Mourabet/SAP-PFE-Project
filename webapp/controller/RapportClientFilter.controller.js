@@ -4,11 +4,11 @@ sap.ui.define([
 ], function (Controller, MessageToast) {
   "use strict";
 
-  return Controller.extend("project1.controller.RapportBacFilter", {
+  return Controller.extend("project1.controller.RapportClientFilter", {
     onAfficherRapport: function () {
       const oView = this.getView();
-      const oStartDate = oView.byId("idDateStart").getDateValue();
-      const oEndDate = oView.byId("idDateEnd").getDateValue();
+      const oStartDate = oView.byId("idDateStartC").getDateValue();
+      const oEndDate = oView.byId("idDateEndC").getDateValue();
 
       if (!oStartDate || !oEndDate) {
         MessageToast.show("Veuillez saisir les deux dates !");
@@ -18,8 +18,10 @@ sap.ui.define([
       const sStartDate = formatDateLocal(oStartDate).split("T")[0]; // yyyy-MM-dd
       const sEndDate = formatDateLocal(oEndDate).split("T")[0];
 
+      console.log("Start Date:", sStartDate);
+      console.log("End Date:", sEndDate);
       // Navigation vers la vue rapport avec paramètres
-      this.getOwnerComponent().getRouter().navTo("rapportbac", {
+      this.getOwnerComponent().getRouter().navTo("rapportclient", {
         startDate: sStartDate,
         endDate: sEndDate
       });
@@ -32,5 +34,4 @@ sap.ui.define([
   const dd = String(date.getDate()).padStart(2, "0");
   return `${yyyy}-${mm}-${dd}`;
   }
-
 });

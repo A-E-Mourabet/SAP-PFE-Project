@@ -137,6 +137,50 @@
           }
           
         },
+        "RapportProduit": {
+          "semanticObject": "project1",
+          "action": "rapportproduit",
+          "title": "Rapport Produit",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+          
+        },
+        "RapportProduitFilter": {
+          "semanticObject": "project1",
+          "action": "RapportProduitFilter",
+          "title": "Rapport Produit",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+          
+        },
+        "RapportClientFilter": {
+          "semanticObject": "project1",
+          "action": "RapportClientFilter",
+          "title": "Rapport Client",
+          "signature": {
+            "parameters": {}
+          },
+          "resolutionResult": {
+            "applicationType": "SAPUI5",
+            "additionalInformation": "SAPUI5.Component=project1",
+            "url": "/sap/bc/ui5_ui5/sap/project1"
+          }
+          
+        },
+
+
         "rapportgl": {
           "semanticObject": "project1",
           "action": "rapportgl",
@@ -284,11 +328,44 @@
           "name": "RapportBacFilter",
           "target": "RapportBacFilter"
         },
+        
         {
           "pattern": "rapportbac/{startDate}/{endDate}",
           "name": "rapportbac",
           "target": "rapportbacresults"
         },
+        {
+          "pattern": "rapportproduit",
+          "name": "RapportProduit",
+          "target": "rapportproduitresults"
+        },
+        {
+          "pattern": "RapportProduitFilter",
+          "name": "RapportProduitFilter",
+          "target": "RapportProduitFilter"
+        },
+        {
+          "pattern": "rapportproduit/{startDate}/{endDate}",
+          "name": "rapportproduit",
+          "target": "rapportproduitresults"
+        },
+        
+        {
+          "pattern": "rapportclient",
+          "name": "RapportClient",
+          "target": "rapportclientresults"
+        },
+        {
+          "pattern": "RapportClientFilter",
+          "name": "RapportClientFilter",
+          "target": "RapportClientFilter"
+        },
+        {
+          "pattern": "rapportClient/{startDate}/{endDate}",
+          "name": "rapportclient",
+          "target": "rapportclientresults"
+        },
+
         {
           "pattern": "rapportgl",
           "name": "rapportgl",
@@ -377,24 +454,35 @@
           "controlId": "app",
           "controlAggregation": "pages"
         },
+        "RapportProduitFilter": {
+          "viewName": "RapportProduitFilter",
+          "viewLevel": 1,
+          "viewType": "XML",
+          "viewId": "RapportProduitFilter",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
+        "RapportClientFilter": {
+          "viewName": "RapportClientFilter",
+          "viewLevel": 1,
+          "viewType": "XML",
+          "viewId": "RapportClientFilter",
+          "controlId": "app",
+          "controlAggregation": "pages"
+        },
         "rapportbacresults": {
           "viewName": "RapportBacResults",
           "viewLevel": 2
         },
-        "rapportgl": {
-          "viewName": "RapportGL",
-          "viewType": "XML",
-          "viewId": "rapportgl",
-          "controlId": "app",
-          "controlAggregation": "pages"
+        "rapportproduitresults": {
+          "viewName": "RapportProduitResults",
+          "viewLevel": 2
         },
-        "rapportclients": {
-          "viewName": "RapportClients",
-          "viewType": "XML",
-          "viewId": "rapportclients",
-          "controlId": "app",
-          "controlAggregation": "pages"
+        "rapportclientresults": {
+          "viewName": "RapportClientResults",
+          "viewLevel": 2
         },
+       
         "TargetDetail": {
           "viewType": "XML",
           "transition": "slide",

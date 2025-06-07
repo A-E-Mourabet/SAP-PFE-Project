@@ -55,7 +55,7 @@ sap.ui.define([
 
             oModel.create("/YJAUGEAGE_CDS", oData, {
                             success: () => {
-                                MessageToast.show("Sortie enregistrée avec succès.");
+                                MessageToast.show("jaugeage enregistrée avec succès.");
                                 this._navToList();
                             },
                             error: (oError) => {

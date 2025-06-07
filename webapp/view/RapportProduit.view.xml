@@ -1,0 +1,32 @@
+<mvc:View
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:core="sap.ui.core"
+  xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+  xmlns:smartTable="sap.ui.comp.smarttable"
+  controllerName="project1.controller.RapportProduit">
+
+  <VBox>
+    <smartFilterBar:SmartFilterBar
+      id="pgProduitFilterBar"
+      entitySet="YPG_PRODUIT_CDS"
+      liveMode="true"
+      useDateRangeType="true"
+      persistencyKey="pgProduitFilter"
+    />
+
+    <smartTable:SmartTable
+      id="pgProduitTable"
+      entitySet="YPG_PRODUIT_CDS"
+      tableType="AnalyticalTable"
+      useExportToExcel="true"
+      useVariantManagement="true"
+      useTablePersonalisation="true"
+      header="PG par Produit"
+      showRowCount="true"
+      smartFilterId="pgProduitFilterBar"
+      enableAutoBinding="true"
+      persistencyKey="pgProduitTable"
+    />
+  </VBox>
+</mvc:View>

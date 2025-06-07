@@ -68,7 +68,7 @@ sap.ui.define([
                                     // Créer la sortie
                                     oModel.create("/YTRANSFERT_BACS_CDS", oData, {
                                         success: () => {
-                                            MessageToast.show("Sortie enregistrée avec succès.");
+                                            MessageToast.show("Transfert enregistrée avec succès.");
                                             this._navToList();
                                         },
                                         error: (oError) => {
